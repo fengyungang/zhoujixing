@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhoujixing.mapper.MenuMapper">
+
+    <resultMap type="com.zhoujixing.entity.SysMenuEntity" id="sysMenuMap">
+        <result property="id" column="id"/>
+        <result property="parentid" column="parentId"/>
+        <result property="menuname" column="menuname"/>
+        <result property="ordernum" column="orderNum"/>
+        <result property="url" column="url"/>
+        <result property="icon" column="icon"/>
+        <result property="attributes" column="attributes"/>
+        <result property="actions" column="actions"/>
+        <result property="platform" column="platform"/>
+        <result property="createtime" column="createTime"/>
+        <result property="creatorid" column="creatorId"/>
+        <result property="state" column="state"/>
+        <result property="menutype" column="menutype"/>
+    </resultMap>
+
+    <sql id="insertTableSql">
+        (parentid,menuname,ordernum,url,icon,attributes,actions,platform,createtime,creatorid,state,menutype)
+    </sql>
+
+    <sql id="selectTableSql">
+        id,parentid,menuname,ordernum,url,icon,attributes,actions,platform,createtime,creatorid,state,menutype
+    </sql>
+
+    <sql id="insertEntitySql">
+        (#{parentid},#{menuname},#{ordernum},#{url},#{icon},#{attributes},#{actions},#{platform},#{createtime},#{creatorid},#{state},#{menutype})
+    </sql>
+    
+    <insert id="insertOrUpdateCameraInfoByOne" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_menu <include refid="insertTableSql"/>
+        value <include refid="insertEntitySql"/>;
+    </insert>
+
+    <insert id="inserSysMenu" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_menu <include refid="insertTableSql"/> value <include refid="insertEntitySql"/>;
+    </insert>
+
+    <select id="byId" resultType="long">
+        select <include refid="insertTableSql"/> from sys_menu where id = #{id}
+    </select>
+
+    <select id="byUserIdListMen" parameterType="java.lang.Long" resultMap="sysMenuMap">
+        select m.* from sys_menu_role r left join sys_menu m on r.menuId = m.id where roleId = #{userid}
+    </select>
+
+    <sql id="selectTableSql">
+        id,parentid,menuname,ordernum,url,icon,attributes,actions,platform,createtime,creatorid,state,menutype
+    </sql>
+    <select id="getMenuList" resultMap="sysMenuMap" parameterType="com.zhoujixing.entity.SysMenuEntity">
+        select <include refid="selectTableSql"/> from sys_menu
+        <where>
+          <if test="menuname != null and menuname !=''">
+              and menuname like CONCAT('%',#{menuname},'%')
+          </if>
+          <if test="platform != null and platform !=''">
+              and platform = #{platform}
+          </if>
+          <if test="createtime != null and createtime !=''">
+              and createtime = #{createtime}
+          </if>
+          <if test="state != null and state !=''">
+              and state = #{state}
+          </if>
+          <if test="menutype !=null and menutype !=''">
+              and menutype = #{menutype}
+          </if>
+          <if test="parentid !=null and parentid !=''">
+              and parentid = #{parentid}
+          </if>
+        </where>
+    </select>
+
+    <delete id="delMenu" parameterType="java.lang.String">
+        delete  from  sys_menu where id = #{id}
+    </delete>
+
+</mapper>

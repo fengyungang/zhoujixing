@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhoujixing.mapper.RoleMapper">
+
+    <!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.zhoujixing.entity.SysRoleEntity" id="sysRoleMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="discription" column="discription"/>
+        <result property="state" column="state"/>
+        <result property="rootflag" column="rootFlag"/>
+        <result property="creatorid" column="creatorId"/>
+        <result property="createtime" column="createTime"/>
+        <result property="options" column="options"/>
+        <result property="fromsite" column="fromSite"/>
+        <result property="platform" column="platform"/>
+    </resultMap>
+
+
+    <insert id="inserSysRole" useGeneratedKeys="true" keyProperty="id">
+        insert into sys_role (name,discription,state,rootflag,creatorid,createtime,options,fromsite,platform)
+        value (#{name},#{discription},#{state},#{rootflag},#{creatorid},#{createtime},#{options},#{fromsite},#{platform})
+    </insert>
+
+    <delete id="delete" parameterType="java.lang.String">
+      delete from sys_role where id= #{id}
+    </delete>
+
+
+    <select id="getList" resultMap="sysRoleMap" parameterType="com.zhoujixing.entity.SysRoleEntity">
+        select name,discription,state,rootflag,creatorid,createtime,options,fromsite,platform from sys_role
+        <where>
+          <if test="name !=null and name!=''">
+              and name = #{name}
+          </if>
+          <if test="discription != null and discription != ''">
+              and discription = #{discription}
+          </if>
+          <if test="state != null and state !=''">
+              and state = #{state}
+          </if>
+          <if test="rootflag != null and rootflag !=''">
+              and  rootflag = #{rootflag}
+          </if>
+          <if test="creatorid != null and creatorid != ''">
+              and creatorid = #{creatorid}
+          </if>
+          <if test="createtime != null and createtime !=''">
+              and createtime = #{createtime}
+          </if>
+          <if test="fromsite !=null and fromsite !=''">
+              and fromsite = #{fromsite}
+          </if>
+          <if test="platform != null and platform !=''">
+              and platform = #{platform}
+          </if>
+        </where>
+    </select>
+
+
+
+</mapper>

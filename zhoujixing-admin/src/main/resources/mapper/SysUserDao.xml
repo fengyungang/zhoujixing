@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhoujixing.mapper.UserMapper">
+
+    <resultMap type="com.zhoujixing.entity.SysUserEntity" id="sysUserMap">
+        <result property="id" column="id"/>
+        <result property="roleid" column="roleId"/>
+        <result property="loginname" column="loginName"/>
+        <result property="loginpass" column="loginPass"/>
+        <result property="realname" column="realName"/>
+        <result property="createtime" column="createTime"/>
+        <result property="sex" column="sex"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="area" column="area"/>
+        <result property="companyid" column="companyId"/>
+        <result property="email" column="email"/>
+        <result property="logincount" column="loginCount"/>
+        <result property="lastloginip" column="lastLoginIp"/>
+        <result property="lastlogintime" column="lastlogintime"/>
+        <result property="lastloginaddr" column="lastLoginAddr"/>
+        <result property="remark" column="remark"/>
+        <result property="state" column="state"/>
+    </resultMap>
+
+    <sql id="tablesql">
+        roleid,loginname,loginpass,realname,createtime,sex,province,city,area,companyid,email,logincount,lastloginip,lastlogintime,lastloginaddr,remark,state
+    </sql>
+    <sql id="entity">
+        (#{roleid},#{loginname},#{loginpass},#{realname},#{createtime},#{sex},#{province},#{city}, #{area},#{companyid},#{email},#{logincount},#{lastloginip},#{lastlogintime},#{lastloginaddr},#{remark},#{state})
+    </sql>
+
+    <insert id="insertUser" useGeneratedKeys="true" keyProperty="id">
+       insert into sys_user (roleid,loginname,loginpass,realname,createtime,sex,province,city,
+        area,companyid,email,logincount,lastloginip,lastlogintime,lastloginaddr,remark,state)value
+        (#{roleid},#{loginname},#{loginpass},#{realname},#{createtime},#{sex},#{province},#{city},
+        #{area},#{companyid},#{email},#{logincount},#{lastloginip},#{lastlogintime},#{lastloginaddr},#{remark},#{state})
+    </insert>
+
+    <select id="getUserList" resultMap="sysUserMap">
+        select id,roleid,loginname,loginpass,realname,createtime,sex,province,city,area,companyid,email,logincount,lastloginip,lastlogintime,lastloginaddr,remark,state from sys_user
+    </select>
+
+    <delete id="deleteUser" parameterType="java.lang.Long">
+      delete from  sys_user where id = #{id}
+    </delete>
+    
+    <select id="findByUserName" parameterType="java.lang.String" resultType="com.zhoujixing.entity.SysUserEntity">
+      select id,roleid,loginname,loginpass,realname,createtime,sex,province,city,area,companyid,email,logincount,lastloginip,lastlogintime,lastloginaddr,remark,state from sys_user where loginname = #{username}
+    </select>
+    <select id="findByUser" parameterType="com.zhoujixing.entity.SysUserEntity" resultMap="sysUserMap">
+        select id,roleid,loginname,loginpass,realname,createtime,sex,province,city,area,companyid,email,logincount,lastloginip,lastlogintime,lastloginaddr,remark,state from sys_user
+        <where>
+            <if test="loginname!=null and loginname!=''">
+                and loginname like CONCAT('%',#{loginname},'%')
+            </if>
+            <if test="realname!=null and realname!=''">
+                and realname like CONCAT('%',#{realname},'%')
+            </if>
+            <if test="sex !=null and sex != ''">
+                and sex = #{sex}
+            </if>
+            <if test="createtime != nul and createtime = ''">
+                and createtime = #{createtime}
+            </if>
+            <if test="province != null and province != ''">
+                and province = #{province}
+            </if>
+            <if test="city != null and city !=''">
+                and city = #{city}
+            </if>
+            <if test="area != null and area != ''">
+                 and area = #{area}
+            </if>
+            <if test="companyid !=null and companyid !=''">
+                 and companyid = #{companyid}
+            </if>
+            <if test="email !=null and email !=''">
+                and email = #{email}
+            </if>
+            <if test="lastlogintime !=null and lastlogintime !=''">
+                 and lastlogintime =#{lastlogintime}
+            </if>
+        </where>
+    </select>
+
+    <update id="updateIP" parameterType="com.zhoujixing.entity.SysUserEntity">
+      update sys_user set lastloginip = #{lastloginip} where id =#{id}
+    </update>
+</mapper>
