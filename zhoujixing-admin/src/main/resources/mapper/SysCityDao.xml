@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.framework.modules.sys.dao.SysCityDao">
+
+	<!-- 可根据自己的需求，是否要使用 -->
+    <resultMap type="com.framework.modules.sys.entity.SysCityEntity" id="sysCityMap">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="parentid" column="parentId"/>
+        <result property="xpath" column="xpath"/>
+        <result property="shortname" column="shortName"/>
+        <result property="leveltype" column="levelType"/>
+        <result property="citycode" column="cityCode"/>
+        <result property="zipcode" column="zipCode"/>
+        <result property="lon" column="lon"/>
+        <result property="lat" column="lat"/>
+        <result property="pinyin" column="pinyin"/>
+        <result property="state" column="state"/>
+    </resultMap>
+
+
+</mapper>

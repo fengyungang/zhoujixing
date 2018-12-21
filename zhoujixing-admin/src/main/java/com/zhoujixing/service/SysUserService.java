@@ -46,4 +46,12 @@ public interface SysUserService {
      * @param userEntity 用户编号
      */
     int updateIP(SysUserEntity userEntity);
+
+    /**
+     * 获得用户分页的方法
+     * @param page
+     * @param rows
+     * @return
+     */
+    List<SysUserEntity> getPageUser(int page,int rows);
 }
