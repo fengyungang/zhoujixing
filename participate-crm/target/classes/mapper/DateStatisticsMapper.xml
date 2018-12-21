@@ -1,0 +1,118 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.participate.dao.DateStatisticsMapper">
+    <!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        date_statistics(word_book_code,date_statistics_bars,date_statistics_time)
+        VALUES
+        (#{word_book_code},#{date_statistics_bars},#{date_statistics_time})
+    </insert>
+    <!--根据id查询一条信息-->
+    <select id="getById" resultType="com.participate.entity.DateStatisticsModel">
+		SELECT * FROM date_statistics WHERE date_statistics_id = #{0}
+	</select>
+    <!--查询所有信息-->
+    <select id="selA" parameterType="map" resultType="com.participate.entity.DateStatisticsModel">
+        SELECT date_statistics_id,word_book_code,date_statistics_bars,date_statistics_time FROM date_statistics
+        <where>
+            <if test="date_statistics_id != null">
+                AND date_statistics_id=#{date_statistics_id}
+            </if>
+            <if test="word_book_code != null">
+                AND word_book_code=#{word_book_code}
+            </if>
+            <if test="date_statistics_bars != null">
+                AND date_statistics_bars=#{date_statistics_bars}
+            </if>
+            <if test="date_statistics_time != null">
+                AND DATE(date_statistics_time) = DATE(#{date_statistics_time})
+            </if>
+            <if test="startTime != null and endTime!=null">
+                AND Date(date_statistics_time)  BETWEEN Date(#{startTime}) and Date(#{endTime})
+            </if>
+            <if test="month != null">
+                AND MONTH(date_statistics_time) = MONTH(#{month})
+            </if>
+            <if test="year != null">
+                AND YEAR (date_statistics_time) = YEAR (#{year})
+            </if>
+        </where>
+        <if test="order != null">
+            ORDER BY  time_statistics_time ASC, word_book_code  DESC
+        </if>
+    </select>
+    <!--查询某个code数量-->
+    <select id="getCodeTotal" resultType="java.lang.Integer" parameterType="map" >
+        SELECT date_statistics_bars FROM date_statistics
+        <where>
+            <if test="date_statistics_id != null">
+                AND date_statistics_id=#{date_statistics_id}
+            </if>
+            <if test="word_book_code != null">
+                AND word_book_code=#{word_book_code}
+            </if>
+            <if test="date_statistics_bars != null">
+                AND date_statistics_bars=#{date_statistics_bars}
+            </if>
+            <if test="date_statistics_time != null">
+                AND DATE(date_statistics_time) = DATE(#{date_statistics_time})
+            </if>
+            <if test="startTime != null and endTime!=null">
+                AND Date(date_statistics_time)  BETWEEN Date(#{startTime}) and Date(#{endTime})
+            </if>
+            <if test="month != null">
+                AND MONTH(date_statistics_time) = MONTH(#{month})
+            </if>
+            <if test="year != null">
+                AND YEAR (date_statistics_time) = YEAR (#{year})
+            </if>
+        </where>
+    </select>
+    <!--查询总数量-->
+    <select id="getTotal" resultType="java.lang.Integer" parameterType="map" >
+        SELECT SUM(date_statistics_bars) FROM date_statistics
+        <where>
+            <if test="date_statistics_id != null">
+                AND date_statistics_id=#{date_statistics_id}
+            </if>
+            <if test="word_book_code != null">
+                AND word_book_code=#{word_book_code}
+            </if>
+            <if test="date_statistics_bars != null">
+                AND date_statistics_bars=#{date_statistics_bars}
+            </if>
+            <if test="date_statistics_time != null">
+                AND DATE(date_statistics_time) = DATE(#{date_statistics_time})
+            </if>
+            <if test="startTime != null and endTime!=null">
+                AND Date(date_statistics_time)  BETWEEN Date(#{startTime}) and Date(#{endTime})
+            </if>
+            <if test="month != null">
+                AND MONTH(date_statistics_time) = MONTH(#{month})
+            </if>
+            <if test="year != null">
+                AND YEAR (date_statistics_time) = YEAR (#{year})
+            </if>
+        </where>
+    </select>
+    <!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE date_statistics
+        <set>
+            <if test="word_book_code != null">
+                word_book_code = #{word_book_code},
+            </if>
+            <if test="date_statistics_bars != null">
+                date_statistics_bars = #{date_statistics_bars},
+            </if>
+            <if test="date_statistics_time != null">
+                date_statistics_time = #{date_statistics_time},
+            </if>
+        </set>
+        WHERE date_statistics_id = #{date_statistics_id}
+    </update>
+    <!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">DELETE FROM date_statistics WHERE date_statistics_id = #{0}</delete>
+</mapper>
+
