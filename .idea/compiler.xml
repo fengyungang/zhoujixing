@@ -13,8 +13,8 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="zhoujixing-admin" options="-parameters" />
-      <module name="zhoujixing-easyui" options="-parameters" />
+      <module name="zhoujixing-admin" options="" />
+      <module name="zhoujixing-easyui" options="" />
     </option>
   </component>
 </project>

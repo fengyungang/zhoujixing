@@ -47,10 +47,6 @@
     <select id="byUserIdListMen" parameterType="java.lang.Long" resultMap="sysMenuMap">
         select m.* from sys_menu_role r left join sys_menu m on r.menuId = m.id where roleId = #{userid}
     </select>
-
-    <sql id="selectTableSql">
-        id,parentid,menuname,ordernum,url,icon,attributes,actions,platform,createtime,creatorid,state,menutype
-    </sql>
     <select id="getMenuList" resultMap="sysMenuMap" parameterType="com.zhoujixing.entity.SysMenuEntity">
         select <include refid="selectTableSql"/> from sys_menu
         <where>
