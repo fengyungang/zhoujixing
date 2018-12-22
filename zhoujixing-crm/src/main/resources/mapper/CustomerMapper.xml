@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.dao.CustomerMapper">
+
+    <resultMap id="DayBaseResultMap" type="com.zhoujixing.entity.DateStatisticsModel">
+
+        <result column="COUNT" jdbcType="INTEGER" property="date_statistics_bars" />
+        <result column="word_book_code" jdbcType="INTEGER" property="word_book_code" />
+    </resultMap>
+
+    <resultMap id="HourBaseResultMap" type="com.zhoujixing.entity.TimeStatisticsModel">
+        <result column="COUNT" jdbcType="INTEGER" property="time_statistics_bars" />
+        <result column="word_book_code" jdbcType="INTEGER" property="word_book_code" />
+    </resultMap>
+
+<!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        customer(salesman_id,customer_name,customer_phone_number,customer_sex,customer_address,customer_create_time,word_book_code)
+        VALUES
+        (#{salesman_id},#{customer_name},#{customer_phone_number},#{customer_sex},#{customer_address},#{customer_create_time},#{word_book_code})
+    </insert>
+<!--根据id查询一条信息-->
+    <select id="getById" resultType="com.zhoujixing.entity.CustomerModel">
+		SELECT * FROM customer WHERE customer_id = #{0}
+	</select>
+<!--查询所有信息-->
+    <select id="selA" parameterType="map" resultType="com.zhoujixing.entity.CustomerModel">
+        SELECT customer_id,salesman_id,customer_name,customer_phone_number,customer_sex,customer_address,customer_create_time,customer_del,word_book_code FROM customer
+        <where>
+            <if test="customer_id != null">
+                AND customer_id=#{customer_id}
+            </if>
+            <if test="salesman_id != null">
+                AND salesman_id=#{salesman_id}
+            </if>
+            <if test="customer_name != null and customer_name != ''">
+                AND customer_name like CONCAT('%', #{customer_name}, '%')
+            </if>
+            <if test="customer_phone_number != null and customer_phone_number != ''">
+                AND customer_phone_number like CONCAT('%', #{customer_phone_number} ,'%')
+            </if>
+            <if test="customer_sex != null and customer_sex != ''">
+                AND customer_sex = #{customer_sex}
+            </if>
+            <if test="word_book_code != null and word_book_code != ''">
+                AND word_book_code = #{word_book_code}
+            </if>
+            <if test="customer_address != null and customer_address != ''">
+                AND customer_address like CONCAT('%', #{customer_address} ,'%')
+            </if>
+            <if test="customer_create_time != null and customer_create_time != ''">
+                AND Date(customer_create_time) =  Date(#{customer_create_time})
+            </if>
+            <if test="customer_del != null">
+                AND customer_del=#{customer_del}
+            </if>
+            <if test="word_book_code != null">
+                AND word_book_code=#{word_book_code}
+            </if>
+            <if test="salesman_parent_id != null or salesman_name != null or salesman_phone_number != null">
+                AND salesman_id in ( select salesman_id from salesman
+             <where>
+                <if test="salesman_parent_id != null">
+                    AND salesman_parent_id=#{salesman_parent_id}
+                </if>
+                <if test="salesman_name != null">
+                    AND salesman_name like CONCAT('%', #{salesman_name} ,'%')
+                </if>
+                 <if test="salesman_phone_number != null">
+                     AND salesman_phone_number like CONCAT('%', #{salesman_phone_number} ,'%')
+                 </if>
+
+           </where>
+                )
+            </if>
+
+        </where>
+    </select>
+<!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE customer
+        <set>
+            <if test="salesman_id != null">
+                salesman_id = #{salesman_id},
+            </if>
+            <if test="customer_name != null">
+                customer_name = #{customer_name},
+            </if>
+            <if test="customer_phone_number != null">
+                customer_phone_number = #{customer_phone_number},
+            </if>
+            <if test="customer_sex != null">
+                customer_sex = #{customer_sex},
+            </if>
+            <if test="customer_address != null">
+                customer_address = #{customer_address},
+            </if>
+            <if test="customer_create_time != null">
+                customer_create_time = #{customer_create_time},
+            </if>
+            <if test="customer_del != null">
+                customer_del = #{customer_del},
+            </if>
+            <if test="word_book_code != null">
+                word_book_code = #{word_book_code},
+            </if>
+        </set>
+        WHERE customer_id = #{customer_id}
+    </update>
+<!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">DELETE FROM customer WHERE customer_id = #{0}</delete>
+<!--根据id删除客户信息（逻辑删除删除）-->
+   <!-- <update id="del">
+        UPDATE customer set customer_del=1 WHERE customer_id = #{customer_id}
+    </update>-->
+
+   <!-- 查询满意度及数量根据日期-->
+
+    <select id="getDayCOUNT" parameterType="java.util.Date" resultMap="DayBaseResultMap">
+        SELECT COUNT( * ) AS COUNT,word_book_code FROM customer
+        WHERE word_book_code != 0 AND customer_del = 0
+        AND  DATE( customer_create_time) = DATE( #{0})
+        GROUP BY word_book_code;
+    </select>
+
+    <!-- 查询满意度及数量根据小时-->
+    <select id="getHourCOUNT" parameterType="java.util.Date" resultMap="HourBaseResultMap">
+        SELECT COUNT( * ) AS COUNT,word_book_code FROM customer
+        WHERE word_book_code != 0 AND customer_del = 0
+        AND  DATE_FORMAT( customer_create_time, '%Y-%m-%d %H') =DATE_FORMAT( #{0}, '%Y-%m-%d %H' )
+        GROUP BY word_book_code;
+    </select>
+</mapper>
+
