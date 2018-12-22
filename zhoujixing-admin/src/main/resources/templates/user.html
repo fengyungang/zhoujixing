@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity3" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>用户管理页面</title>
+    <link rel="stylesheet" href="/static/jqueryeasyui1.6.11/themes/default/easyui.css">
+    <link rel="stylesheet" href="/static/jqueryeasyui1.6.11/themes/icon.css">
+    <link rel="stylesheet" href="/static/jqueryeasyui1.6.11/demo/demo.css">
+    <script type="text/javascript" src="/static/jqueryeasyui1.6.11/jquery.min.js"></script>
+    <script type="text/javascript" src="/static/jqueryeasyui1.6.11/jquery.easyui.min.js"></script>
+    <script type="text/javascript" src="/static/jqueryeasyui1.6.11/locale/easyui-lang-zh_CN.js"></script>
+    <script type="text/javascript" th:inline="none">
+        $(function () {
+            $('#dg').datagrid({
+                url:'getUserList',
+                pageSize:'30',
+                pagination:true,
+                rownumbers:true,
+                toolbar:'#tb',
+                columns:[[
+                    {field:'loginname',title:'账号',width:100,align:'center'},
+                    {field:'realname',title:'真实姓名',width:100,align:'center'},
+                    {field:'sex',title:'性别',width:100,align:'center'},
+                    {field:'email',title:'电子邮箱',width:'auto',align:'center'},
+                    {field:'d',title:'操作',width:100,align:'center',formatter:function(value,row,index){
+                            return "<a href='getId?id="+row.id+"'>修改</a>&nbsp;&nbsp;&nbsp;<a href='deleUser?id="+row.id+"'>删除</a>";
+                        }}
+                ]]
+            });
+            <!-- 用户添加的窗口-->
+            $('#dd').dialog({
+                title:'用户添加',
+                width:'auto',
+                height:'auto',
+                closed:true,
+                cache:false,
+                modal:true
+            });
+            <!-- 获得角色下拉表-->
+            $('#js').combobox({
+                url:'getRoleList',
+                valueField:'id',
+                textField:'name'
+            });
+        });
+        function add_dialog() {
+            $('#dd').dialog('open');
+        }
+    </script>
+</head>
+<body>
+    <title id="dg"></title>
+    <div id="tb">
+        <a href="javascript:add_dialog()" class="easyui-linkbutton" iconCls="icon-add">添加</a>
+    </div>
+    <div id="dd">
+        <form id="myform" method="post">
+            <table>
+                <tr>
+                    <td align="center">用户账号:</td>
+                    <input type="hidden" name="loginId" value="${user.loginId }">
+                    <td><input name="dataName" class="f1 easyui-textbox"></input></td>
+                </tr>
+                <tr>
+                    <td align="center">用户密码:</td>
+                    <td><input id="ztai" name="dastId" value="请选择状态"></td>
+                </tr>
+                <tr>
+                    <td align="center">用户真实姓名:</td>
+                    <td width="200">
+                        <input id="tel" name="dataPhone" onfocus="telFocuse()" onblur="telBlur()"/>
+                        <div id="telId"></div>
+                    </td>
+                </tr>
+                <tr>
+                    <td align="center">性别:</td>
+                    <td><input id="cc" name="ptbId" value="请选择平台"></td>
+                </tr>
+                <tr>
+                    <td align="center">地区:</td>
+                    <td> <input name="dataTime" class="easyui-datebox" style="width:100%"></td>
+                </tr>
+                <tr>
+                    <td align="center">电子邮箱:</td>
+                    <td><input name="dataHuifangshijian" class="f1 easyui-textbox"></input></td>
+                </tr>
+                <tr>
+                    <td align="center">用户角色:</td>
+                    <td><input id="js" name="name"></input></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td><input type="submit" value="保存"></input></td>
+                </tr>
+            </table>
+        </form>
+    </div>
+</body>
+</html>
