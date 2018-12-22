@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/zhoujixing.iml" filepath="$PROJECT_DIR$/.idea/zhoujixing.iml" />
       <module fileurl="file://$PROJECT_DIR$/zhoujixing-admin/zhoujixing-admin.iml" filepath="$PROJECT_DIR$/zhoujixing-admin/zhoujixing-admin.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zhoujixing-cangku/zhoujixing-cangku.iml" filepath="$PROJECT_DIR$/zhoujixing-cangku/zhoujixing-cangku.iml" />
       <module fileurl="file://$PROJECT_DIR$/zhoujixing-crm/zhoujixing-crm.iml" filepath="$PROJECT_DIR$/zhoujixing-crm/zhoujixing-crm.iml" />
       <module fileurl="file://$PROJECT_DIR$/zhoujixing-easyui/zhoujixing-easyui.iml" filepath="$PROJECT_DIR$/zhoujixing-easyui/zhoujixing-easyui.iml" />
     </modules>
