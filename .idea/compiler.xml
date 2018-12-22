@@ -7,14 +7,15 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="zhoujixing-admin" />
+        <module name="zhoujixing-crm" />
         <module name="zhoujixing-easyui" />
       </profile>
     </annotationProcessing>
-  </component>
-  <component name="JavacSettings">
-    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="zhoujixing-admin" options="" />
-      <module name="zhoujixing-easyui" options="" />
-    </option>
+    <bytecodeTargetLevel>
+      <module name="zhoujixing" target="1.8" />
+      <module name="zhoujixing-admin" target="8" />
+      <module name="zhoujixing-crm" target="1.7" />
+      <module name="zhoujixing-easyui" target="1.7" />
+    </bytecodeTargetLevel>
   </component>
 </project>
