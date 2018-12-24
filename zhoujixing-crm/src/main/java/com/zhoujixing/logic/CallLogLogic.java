@@ -55,25 +55,25 @@ public class CallLogLogic {
      */
     public Result selA(Integer customer_id,Integer salesman_id,String call_log_content,String call_log_customer_feedback,String call_log_create_time,String call_log_contact_time,Integer pageIndex,Integer pageSize){
         // 设置默认页码每页数量
-        pageIndex = pageIndex==null?1:pageIndex;
-        pageSize = pageSize==null?5:pageSize;
+    pageIndex = pageIndex==null?1:pageIndex;
+    pageSize = pageSize==null?5:pageSize;
 
-        Map<String,Object> map = new HashMap<>();
+    Map<String,Object> map = new HashMap<>();
 
         map.put("customer_id",customer_id);
         map.put("salesman_id",salesman_id);
         map.put("call_log_content",call_log_content);
         map.put("call_log_customer_feedback",call_log_customer_feedback);
         if (call_log_create_time!=null&&!"".equals(call_log_create_time)){
-            //传入格式 yyyy-MM-dd，判断是否为空，空指针
-            map.put("call_log_create_time", DateUtils.StD(call_log_create_time,"yyyy-MM-dd"));
-        }
-        if (call_log_contact_time!=null&&!"".equals(call_log_contact_time)){
-            //传入格式 yyyy-MM-dd，判断是否为空，空指针
-            map.put("call_log_contact_time", DateUtils.StD(call_log_contact_time,"yyyy-MM-dd"));
-        }
-        return Result.generate(0,"select call_log success",callLogService.selA(map,pageIndex,pageSize));
+        //传入格式 yyyy-MM-dd，判断是否为空，空指针
+        map.put("call_log_create_time", DateUtils.StD(call_log_create_time,"yyyy-MM-dd"));
     }
+        if (call_log_contact_time!=null&&!"".equals(call_log_contact_time)){
+        //传入格式 yyyy-MM-dd，判断是否为空，空指针
+        map.put("call_log_contact_time", DateUtils.StD(call_log_contact_time,"yyyy-MM-dd"));
+    }
+        return Result.generate(0,"select call_log success",callLogService.selA(map,pageIndex,pageSize));
+}
 
     /**
      * 根据通话记录信息表id更改通话记录信息

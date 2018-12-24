@@ -1,4 +1,4 @@
-package com.zhoujixing.mapper;
+package com.zhoujixing.service;
 
 
 import com.zhoujixing.entity.CooperateEntity;
@@ -7,8 +7,8 @@ import org.springframework.stereotype.Repository;
 import java.util.List;
 import java.util.Map;
 
-@Repository
-public interface CooperateMapper {
+
+public interface CooperateService {
     /**
      * 添加方法
      * @param cooperateEntity
@@ -24,12 +24,13 @@ public interface CooperateMapper {
     CooperateEntity getById(Integer cooperate_id);
 
     /**
-     * 查询所有信息
+     * 查询所有信息（支持分页）
      * @param map
+     * @param pageIndex
+     * @param pageSize
      * @return
      */
-    List<CooperateEntity> selA(Map<String, Object> map);
-
+    Map<String,Object> selA(Map<String,Object> map, Integer pageIndex, Integer pageSize);
     /**
      * 根据id修改某条信息
      * @param cooperateEntity
