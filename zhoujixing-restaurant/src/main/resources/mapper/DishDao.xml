@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhoujixing.mapper.DishMapper">
+
+    <resultMap id="listDish" type="com.zhoujixing.entity.Dish" >
+        <result property="id" column="id"/>
+        <result property="dishName" column="dish_name"/>
+        <result property="price" column="price"/>
+        <result property="describes" column="describes"/>
+        <result property="image" column="image"/>
+        <result property="categoryId" column="category_id"/>
+        <result property="createTime" column="create_time"/>
+        <result property="updateTime" column="update_time"/>
+    </resultMap>
+
+    <!--void insertDish(Dish dish)插入菜品的方法-->
+    <insert id="insertDish" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.zhoujixing.entity.Dish">
+        insert into dishes (dish_name,price,depict,image,category_id,create_time,update_time)values
+        (#{dishName},#{price},#{depict},#{image},#{categoryId},#{createTime},#{updateTime})
+    </insert>
+
+    <!--List<Dish> selectByCategoryId(Integer categoryId)根据菜品类型查询菜品信息-->
+    <select id="selectByCategoryId" resultMap="listDish">
+        select id,dish_name,price,depict,image,category_id,create_time,update_time
+        from dishes
+        where category_id = #{categoryId}
+    </select>
+
+    <!--Dish selectById(Integer id)根据id查询菜品信息-->
+    <select id="selectById" resultMap="listDish">
+        select id,dish_name,price,depict,image,category_id,create_time,update_time
+        from dishes
+        where id = #{id}
+    </select>
+
+    <!--Dish selectByDishName(String dishName)根据菜品名称查询菜品信息-->
+    <select id="selectByDishName" resultMap="listDish">
+        select id,dish_name,price,depict,image,category_id,create_time,update_time
+        from dishes
+        where dish_name = #{dishName}
+    </select>
+
+    <!--int updateDish(Dish dish)修改菜品信息-->
+    <update id="updateDish" parameterType="com.zhoujixing.entity.Dish">
+        update dishes
+        <set>
+            <if test="price!=null">price=#{price},</if>
+            <if test="depict!=null">depict=#{depict},</if>
+            <if test="image!=null">image=#{image},</if>
+            <if test="categoryId!=null">category_id=#{categoryId},</if>
+            update_time=#{updateTime}
+        </set>
+        where dish_name = #{dishName}
+    </update>
+
+    <!--int deleteDish(Integer id)根据id删除菜品信息-->
+    <delete id="deleteDish">
+        delete from dishes
+        where id = #{id}
+    </delete>
+
+</mapper>

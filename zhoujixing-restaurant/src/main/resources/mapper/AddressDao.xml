@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhoujixing.mapper.AddressMapper">
+
+    <resultMap id="listAddress" type="com.zhoujixing.entity.Address" >
+        <result property="id" column="id"/>
+        <result property="buyerId" column="buyer_id"/>
+        <result property="storeId" column="store_id"/>
+        <result property="province" column="province"/>
+        <result property="city" column="city"/>
+        <result property="area" column="area"/>
+        <result property="detailedAddress" column="detailed_address"/>
+        <result property="isDefault" column="isDefault"/>
+    </resultMap>
+
+    <!--int insertAddress(Address address)添加地址信息-->
+    <insert id="insertAddress" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.zhoujixing.entity.Address">
+        insert into addresses (buyer_id, store_id, province, city, area, detailed_address,isDefault)
+        VALUES (#{buyerId},#{storeId},#{province},#{city},#{area},#{detailedAddress},#{isDefault})
+    </insert>
+
+    <!--Address selectById(Integer id)根据id查询地址-->
+    <select id="selectById" resultMap="listAddress">
+        select id,buyer_id, store_id, province, city, area, detailed_address,isDefault
+        from addresses
+        where id = #{id}
+    </select>
+
+    <!--Address selectByBuyerId(Integer buyerId)根据订单编号查询地址信息-->
+    <select id="selectByBuyerId" resultMap="listAddress">
+        select id,buyer_id, store_id, province, city, area, detailed_address,isDefault
+        from addresses
+        where buyer_id = #{buyerId}
+    </select>
+
+    <!--Address selectByStoreId(Integer storeId)根据店铺id查询地址信息-->
+    <select id="selectByStoreId" resultMap="listAddress">
+        select id,buyer_id, store_id, province, city, area, detailed_address,isDefault
+        from addresses
+        where store_id = #{storeId}
+    </select>
+
+    <!--int updateAddress(Address address)修改地址信息-->
+    <update id="updateAddress" parameterType="com.zhoujixing.entity.Address">
+        update addresses
+        <set>
+            <if test="buyerId != null">buyer_id = #{buyerId},</if>
+            <if test="storeId != null">store_id = #{storeId},</if>
+            <if test="province != null">province = #{province},</if>
+            <if test="city != null">city = #{city},</if>
+            <if test="area != null">area = #{area},</if>
+            <if test="detailedAddress != null">detailed_address = #{detailedAddress},</if>
+            <if test="isDefault != null">isDefault = #{isDefault}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--int deleteAddress(Integer id)根据id删除地址-->
+    <delete id="deleteAddress">
+        delete from addresses
+        where id = #{id}
+    </delete>
+</mapper>
