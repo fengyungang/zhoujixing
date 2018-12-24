@@ -4,6 +4,7 @@ import com.zhoujixing.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface UserMapper {
@@ -47,4 +48,11 @@ public interface UserMapper {
      * @return
      */
     int updateIP(SysUserEntity userEntity);
+
+    /**
+     * 用户分页的方法
+     * @param data
+     * @return
+     */
+    List<SysUserEntity> getPageUser(Map<String,Object> data);
 }

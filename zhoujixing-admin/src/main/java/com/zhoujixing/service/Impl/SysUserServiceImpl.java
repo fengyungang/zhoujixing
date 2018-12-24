@@ -8,7 +8,9 @@ import com.zhoujixing.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SysUserServiceImpl implements SysUserService {
@@ -50,5 +52,14 @@ public class SysUserServiceImpl implements SysUserService {
     public int updateIP(SysUserEntity userEntity) {
         int a = userMapper.updateIP(userEntity);
         return a;
+    }
+
+    @Override
+    public List<SysUserEntity> getPageUser(int page, int rows) {
+        Map<String,Object> data = new HashMap<String, Object>();
+        data.put("currIndex",(page-1)*rows);
+        data.put("pageSize",rows);
+        List<SysUserEntity> list =userMapper.getPageUser(data);
+        return list;
     }
 }
