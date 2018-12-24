@@ -1,0 +1,229 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.participate.mapper.WuPinMapper">
+   <insert id="insertWuPin"  useGeneratedKeys="true" keyProperty="id" parameterType="com.participate.entity.MenuEntity">
+         insert  into shuxing (name,dizhi,fuid,paixu)
+         value (#{name},#{dizhi},#{fuid},#{paixu})
+   </insert>
+
+    <select id="selecatSuoyou" resultType="com.participate.entity.MenuEntity">
+        select name from shuxing
+    </select>
+
+    <select id="selectWuPin" resultType="com.participate.entity.MenuEntity">
+        select cai_id,name,dizhi,paixu from shuxing where fuid=#{fuid}
+    </select>
+
+    <delete id="delete">
+        delete from  shuxing
+         where
+        cai_id=#{cai_id}
+    </delete>
+
+    <select id="deleteCangku"  resultType="com.participate.entity.MenuEntity">
+        select cai_id,fuid from shuxing where name=#{name};
+    </select>
+
+    <select id="selectCangKu"  resultType="com.participate.entity.MenuEntity">
+        select name from shuxing where fuid=#{cai_id};
+    </select>
+
+    <insert id="insertCangKu">
+         insert  into shuxing (name,dizhi,fuid,paixu)
+         value (#{name},#{dizhi},#{fuid},#{paixu})
+    </insert>
+
+
+
+    <insert id="insertDanWei" useGeneratedKeys="true" keyProperty="dan_id" parameterType="com.participate.entity.CompanyEntity">
+        insert into danwei(dan_name,dan_state)
+        value (#{dan_name},#{dan_state})
+    </insert>
+
+    <select id="selectDanWei" resultType="com.participate.entity.CompanyEntity">
+        select  * from danwei where  dan_state=0
+
+    </select>
+
+    <select id="selectDanWeia" resultType="com.participate.entity.CompanyEntity">
+        select  * from danwei where  dan_state=1
+
+    </select>
+
+    <update id="updateDanWei">
+        update danwei set  dan_state=0  where dan_id=#{dan_id};
+    </update>
+
+    <update id="deleteDanWei">
+        update danwei set  dan_state=1  where dan_id=#{dan_id};
+    </update>
+
+    <update id="xiugaiDanWei">
+       update danwei set  dan_name=#{dan_name}  where dan_id=#{dan_id};
+    </update>
+    <select id="chaxunDanWei" resultType="com.participate.entity.CompanyEntity">
+        select dan_id,dan_name,dan_state from danwei where dan_name=#{dan_name}
+    </select>
+    <!-- 品牌表-->
+    <insert id="insertPinPai" useGeneratedKeys="true" keyProperty="pin_id" parameterType="com.participate.entity.DrandEntity">
+        insert into pinpai(pin_name,pin_state)
+        value (#{pin_name},#{pin_state})
+    </insert>
+    <select id="selectPinPai" resultType="com.participate.entity.DrandEntity">
+        select *  from pinpai where pin_state=0
+    </select>
+    <select id="selectPinPaia" resultType="com.participate.entity.DrandEntity">
+        select *  from pinpai where pin_state=1
+    </select>
+    <update id="xiugaiPinPai">
+        update pinpai set pin_state=0 where pin_id=#{pin_id}
+    </update>
+
+    <update id="deletePinPai">
+        update pinpai set pin_state=1 where pin_id=#{pin_id}
+    </update>
+    <select id="namePinPai" resultType="com.participate.entity.DrandEntity">
+        select * from pinpai where pin_name=#{pin_name}
+    </select>
+    <update id="xiunamePinPai">
+       update pinpai set  pin_name=#{pin_name}  where pin_id=#{pin_id};
+    </update>
+
+    <!--/**
+     * 物品插入模块
+     * 插入物品的信息
+     */-->
+    <insert id="insertgoods"  useGeneratedKeys="true" keyProperty="wu_id" parameterType="com.participate.entity.CaruEntity">
+         insert  into goods (wu_name,wu_remarks,wu_foundtime,wu_founder,dan_id,pin_id,shu_id,wu_price)
+         value (#{wu_name},#{wu_remarks},#{wu_foundtime},#{wu_founder},#{dan_id},#{pin_id},#{shu_id},#{wu_price})
+   </insert>
+
+   <select id="nameupdateshuxing" resultType="com.participate.entity.CaruEntity">
+       select * from shuxing  where name=#{name}
+   </select>
+
+   <update id="updateshuxing">
+      update shuxing set wuid=#{wuid} where cai_id=#{cai_id}
+   </update>
+
+    <select id="nameselectDanwei" resultType="com.participate.entity.CaruEntity">
+        select  * from danwei where  dan_name=#{dan_name}
+    </select>
+
+    <select id="nameselectPinpai" resultType="com.participate.entity.CaruEntity">
+        select * from pinpai where pin_name=#{pin_name}
+    </select>
+    <select id="nameselectWupin" resultType="com.participate.entity.CaruEntity">
+        select * from goods where  shu_id=#{cai_id}
+    </select>
+    <select id="pinselectwupin" resultType="com.participate.entity.CaruEntity">
+        select * from pinpai where  pin_id=#{pin_id}
+    </select>
+    <select id="danselectwupin" resultType="com.participate.entity.CaruEntity">
+        select * from danwei where dan_id=#{dan_id}
+    </select>
+
+    <delete id="deletenamewupin">
+        delete  from goods
+        where  wu_name=#{wu_name}
+    </delete>
+
+    <select id="nameselectwupina" resultType="com.participate.entity.CaruEntity">
+        select * from goods where wu_name=#{wu_name}
+    </select>
+
+    <update id="updatenamewupin">
+        update goods set
+
+
+        <if test="dan_id!=null">dan_id=#{dan_id}</if>,
+
+        <if test="pin_id!=null">pin_id=#{pin_id}</if>,
+        <if test="wu_name!=null">wu_name=#{wu_name}</if>,
+        <if test="wu_remarks!=null">wu_remarks=#{wu_remarks}</if>,
+        <if test="wu_price!=null">wu_price=#{wu_price}</if>
+         where wu_id=#{wu_id}
+    </update>
+
+    <select id="selectsy" resultType="com.participate.entity.MenuEntity">
+        select * from shuxing where name=#{name}
+    </select>
+
+    <select id="selectshuxing" resultType="com.participate.entity.ChuruEntity">
+        select * from shuxing where name=#{wu_fenlei};
+    </select>
+
+    <select id="selectwupin" resultType="com.participate.entity.ChuruEntity">
+        select * from goods where wu_name=#{wu_name} and shu_id=#{ru_shuid}
+    </select>
+
+    <update id="updatewupin">
+        update goods set wu_kucun=#{wu_kucun} where wu_id=#{ru_wuid}
+    </update>
+
+    <insert id="insertchuruku"  parameterType="com.participate.entity.ChuruEntity">
+         insert into churuku (ru_wuid,ru_ruku,ru_rukur,ru_cangid,ru_rukushu,ru_leixing,ru_shijiru,ru_sunhao,ru_kucun)
+         value (#{ru_wuid},#{ru_ruku},#{ru_rukur},#{ru_cangid},#{ru_rukushu},#{ru_leixing},#{ru_shijiru},#{ru_sunhao},#{wu_kucun})
+   </insert>
+    
+    <select id="kucunselect" resultType="com.participate.entity.ChuruEntity">
+        select * from ;
+    </select>
+
+    <select id="fuidselect" resultType="com.participate.entity.MenuEntity">
+        select * from shuxing where fuid=#{id}
+    </select>
+    
+    <select id="cangkunameselect" resultType="com.participate.entity.ChuruEntity">
+        select * from goods where shu_id=#{shu_id};
+    </select>
+
+    <select id="fubenselect" resultType="com.participate.entity.ChuruEntity">
+        select * from shuxing where fuid=#{cai_id} and name=#{wu_fenlei}
+    </select>
+    
+    <select id="youwupinselect" resultType="com.participate.entity.ChuruEntity">
+        select * from goods where wu_name=#{wu_name} and shu_id=#{cai_id};
+    </select>
+
+    <select id="youwupinselecta" resultType="com.participate.entity.ChuruEntity">
+        select * from goods where  shu_id=#{cai_id}
+    </select>
+
+    <select id="zhiyouwupin" resultType="com.participate.entity.ChuruEntity">
+        select * from goods where  wu_name=#{wu_name}
+    </select>
+
+    <select id="youfenlwup" resultType="com.participate.entity.ChuruEntity">
+        select * from goods where  wu_name=#{wu_name} and shu_id=#{cai_id}
+    </select>
+
+    <select id="suoyou" resultType="com.participate.entity.ChuruEntity">
+        select * from goods;
+    </select>
+
+    <select id="banxiaoshi" resultType="com.participate.entity.ChuruEntity">
+        select * from goods;
+    </select>
+
+    <select id="tongji" resultType="com.participate.entity.ChuruEntity">
+        select * from churuku
+        where
+        ru_ruku &lt; #{modate}
+        and ru_ruku > #{qidate}
+        <if test="ru_cangid!=null">AND  ru_cangid=#{name}</if>
+        and  ru_leixing=0
+    </select>
+    <select id="tongjia" resultType="com.participate.entity.ChuruEntity">
+        select * from churuku
+        where
+        ru_ruku &lt; #{modate}
+        and ru_ruku > #{qidate}
+        <if test="ru_cangid!=null">AND  ru_cangid=#{name}</if>
+        and  ru_leixing=1
+    </select>
+
+
+
+</mapper>
