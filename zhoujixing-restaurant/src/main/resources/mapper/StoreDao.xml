@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.mapper.StoreMapper">
+
+    <resultMap id="listStore" type="com.zhoujixing.entity.Store">
+        <result property="id" column="id"/>
+        <result property="storeName" column="store_name"/>
+        <result property="storeAddress" column="store_address"/>
+        <result property="practiceTime" column="practice_time"/>
+        <result property="storeType" column="store_type"/>
+        <result property="storeStatus" column="store_status"/>
+        <result property="image" column="image"/>
+        <result property="dutyParagraph" column="duty_paragraph"/>
+        <result property="enterpriseLegalPerson" column="enterprise_legal_person"/>
+        <result property="phone" column="phone"/>
+    </resultMap>
+
+    <!--int insertStore(Store store)插入店铺信息-->
+    <insert id="insertStore" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.zhoujixing.entity.Store">
+        insert into store (store_name, store_address, practice_time, store_type, store_status, image, duty_paragraph, enterprise_legal_person, phone)
+        values (#{storeName},#{storeAddress},#{practiceTime},#{storeType},#{storeStatus},#{image},#{dutyParagraph},#{enterpriseLegalPerson},#{phone})
+    </insert>
+
+    <!--List<Store> selectAllStore()查询所有店铺信息-->
+    <select id="selectAllStore" resultMap="listStore">
+        select id,store_name, store_address, practice_time, store_type, store_status, image, duty_paragraph, enterprise_legal_person, phone
+        from store
+    </select>
+
+    <!--Store selectById(Integer id)根据id查询店铺信息-->
+    <select id="selectById" resultMap="listStore">
+        select id,store_name, store_address, practice_time, store_type, store_status, image, duty_paragraph, enterprise_legal_person, phone
+        from store
+        where id = #{id}
+    </select>
+
+    <!--int updateStore(Store store)修改店铺信息-->
+    <update id="updateStore" parameterType="com.zhoujixing.entity.Store">
+        update store
+        <set>
+            <if test="storeName !=null">store_name = #{storeName},</if>
+            <if test="storeAddress !=null">store_address = #{storeAddress},</if>
+            <if test="practiceTime !=null">practice_time = #{practiceTime},</if>
+            <if test="storeType !=null">store_type = #{storeType},</if>
+            <if test="storeStatus !=null">store_status = #{storeStatus},</if>
+            <if test="image !=null">image = #{image},</if>
+            <if test="dutyParagraph !=null">duty_paragraph = #{dutyParagraph},</if>
+            <if test="enterpriseLegalPerson !=null">enterprise_legal_person = #{enterpriseLegalPerson},</if>
+            <if test="phone !=null">phone = #{phone}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--int deleteStore(Integer id)根据id删除店铺信息-->
+    <delete id="deleteStore">
+        delete from store
+        where id = #{id}
+    </delete>
+
+</mapper>

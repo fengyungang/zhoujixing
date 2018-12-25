@@ -13,6 +13,7 @@
     <module>zhoujixing-easyui</module>
     <module>zhoujixing-crm</module>
       <module>zhoujixing-cangku</module>
+      <module>zhoujixing-restaurant</module>
 
   </modules>
 

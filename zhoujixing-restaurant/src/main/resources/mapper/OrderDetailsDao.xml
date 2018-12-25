@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.mapper.OrderDetailsMapper">
+    <resultMap id="detailslist" type="com.zhoujixing.entity.OrderDetails">
+        <result property="id" column="id"/>
+        <result property="buyerId" column="buyer_id"/>
+        <result property="dishId" column="dish_id"/>
+        <result property="tableId" column="table_id"/>
+        <result property="dishName" column="dish_name"/>
+        <result property="price" column="price"/>
+        <result property="amount" column="amount"/>
+        <result property="image" column="image"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <!--int insertDetails(OrderDetails orderDetails)插入订单详情信息-->
+    <insert id="insertDetails" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.zhoujixing.entity.OrderDetails">
+        insert into order_details (buyer_id, dish_id, table_id, dish_name, price, amount, image, create_time)
+        values(#{buyerId},#{dishId},#{tableId},#{dishName},#{price},#{amount},#{image},#{createTime})
+    </insert>
+
+    <!--OrderDetails selectById(Integer id)根据id查询订单详情-->
+    <select id="selectById" resultMap="detailslist">
+        select id,buyer_id, dish_id, table_id, dish_name, price, amount, image, create_time
+        from order_details
+        where id = #{id}
+    </select>
+
+    <!--List<OrderDetails> selectByBuyerId(Integer buyerId)根据买家id查询订单详情-->
+    <select id="selectByBuyerId" resultMap="detailslist">
+        select id,buyer_id, dish_id, table_id, dish_name, price, amount, image, create_time
+        from order_details
+        where buyer_id = #{buyerId}
+    </select>
+
+    <!--int updateDetails(OrderDetails orderDetails)修改订单详情信息-->
+    <update id="updateDetails" parameterType="com.zhoujixing.entity.OrderDetails">
+        update order_details
+        <set>
+            <if test="buyerId !=null">buyer_id = #{buyerId},</if>
+            <if test="dishId !=null">dish_id = #{dishId},</if>
+            <if test="tableId !=null">table_id = #{tableId},</if>
+            <if test="dishName !=null">dish_name = #{dishName},</if>
+            <if test="price !=null">price = #{price},</if>
+            <if test="amount !=null">amount = #{amount},</if>
+            <if test="image !=null">image = #{image},</if>
+            <if test="createTime !=null">create_time = #{createTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--int deleteDetails(Integer id)根据买家id删除订单详情信息-->
+    <delete id="deleteDetails">
+        delete from order_details
+        where id = #{id}
+    </delete>
+</mapper>
