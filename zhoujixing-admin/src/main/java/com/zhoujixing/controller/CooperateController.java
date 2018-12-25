@@ -20,7 +20,7 @@ import java.util.Map;
  */
 @io.swagger.annotations.Api(value="cooperate接口", tags="cooperate接口")
 @RestController
-@RequestMapping("api/cooperate")
+@RequestMapping("cooperate")
 public class CooperateController {
     @Autowired
     private CooperateService cooperateService;
