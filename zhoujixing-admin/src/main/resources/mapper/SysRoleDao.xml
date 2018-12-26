@@ -29,7 +29,7 @@
 
 
     <select id="getList" resultMap="sysRoleMap" parameterType="com.zhoujixing.entity.SysRoleEntity">
-        select name,discription,state,rootflag,creatorid,createtime,options,fromsite,platform from sys_role
+        select id,name,discription,state,rootflag,creatorid,createtime,options,fromsite,platform from sys_role
         <where>
           <if test="name !=null and name!=''">
               and name = #{name}

@@ -4,7 +4,7 @@ import com.zhoujixing.entity.SysCityEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
-import java.util.Map;
+
 @Mapper
 public interface CityMapper {
 
@@ -13,5 +13,5 @@ public interface CityMapper {
      * @param cityEntity
      * @return
      */
-    List<SysCityEntity> cityList(SysCityEntity cityEntity);
+    List<SysCityEntity> getCityList(SysCityEntity cityEntity);
 }

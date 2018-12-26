@@ -43,6 +43,32 @@
                 valueField:'id',
                 textField:'name'
             });
+            $('#sheng').combobox({
+                url:'getCity?leveltype=1',
+                valueField:'id',
+                textField:'shortname',
+                onSelect:function (area) {
+                    $('#shi').combobox('clear');
+                    $("#qu").combobox('clear');
+                    alert(area.id);
+                    $("#shi").combobox('reload','getCity?leveltype=1&parentid='+area.id);
+                    $("#qu").combobox('reload','getCity?leveltype=3')
+                }
+            });
+            $('#shi').combobox({
+                url:"getCity?leveltype=2",
+                valueField:'id',
+                textField:'shortname',
+                onSelect:function (area) {
+                    $("#qu").combobox('clear');
+                    $("#qu").combobox('reload','getCity?leveltype=3&parentid='+area.id)
+                }
+            });
+            $("#qu").combobox({
+                url:'getCity?leveltype=3',
+                valueField:'id',
+                textField:'shortname',
+            });
         });
         function add_dialog() {
             $('#dd').dialog('open');
@@ -78,8 +104,16 @@
                     <td><input id="cc" name="ptbId" value="请选择平台"></td>
                 </tr>
                 <tr>
-                    <td align="center">地区:</td>
-                    <td> <input name="dataTime" class="easyui-datebox" style="width:100%"></td>
+                    <td align="center">省：</td>
+                    <td><input id="sheng"></td>
+                </tr>
+                <tr>
+                    <td align="center">市：</td>
+                    <td><input id="shi"></td>
+                </tr>
+                <tr>
+                    <td align="center">区：</td>
+                    <td><input id="qu"></td>
                 </tr>
                 <tr>
                     <td align="center">电子邮箱:</td>

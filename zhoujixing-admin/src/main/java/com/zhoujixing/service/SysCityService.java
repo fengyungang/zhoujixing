@@ -10,5 +10,5 @@ public interface SysCityService {
      * @param cityEntity
      * @return
      */
-    List<SysCityEntity> cityList(SysCityEntity cityEntity);
+    List<SysCityEntity> getCityList(SysCityEntity cityEntity);
 }

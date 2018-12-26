@@ -6,6 +6,7 @@ import com.zhoujixing.service.SysCityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 
 @Service
@@ -15,7 +16,8 @@ public class SysCityServiceImpl implements SysCityService {
     private CityMapper cityMapper;
 
     @Override
-    public List<SysCityEntity> cityList(SysCityEntity cityEntity) {
-        return null;
+    public List<SysCityEntity> getCityList(SysCityEntity cityEntity) {
+        List<SysCityEntity>list = cityMapper.getCityList(cityEntity);
+        return list;
     }
 }
