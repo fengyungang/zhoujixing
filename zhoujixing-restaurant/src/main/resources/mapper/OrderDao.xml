@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.mapper.OrderMapper">
+
+    <resultMap id="listOrder" type="com.zhoujixing.entity.Order">
+        <result property="id" column="id"/>
+        <result property="buyerName" column="buyer_name"/>
+        <result property="buyerPhone" column="buyer_phone"/>
+        <result property="buyerAddress" column="buyer_address"/>
+        <result property="totalMoney" column="total_money"/>
+        <result property="orderStatus" column="order_status"/>
+        <result property="paymentStatus" column="payment_status"/>
+        <result property="createTime" column="create_time"/>
+    </resultMap>
+
+    <!--int insertOrder(Order order)插入订单信息-->
+    <insert id="insertOrder" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.zhoujixing.entity.Order">
+        insert into order_form(buyer_name,buyer_phone,buyer_address,total_money,order_status,payment_status,create_time)
+        values (#{buyerName},#{buyerPhone},#{buyerAddress},#{totalMoney},#{orderStatus},#{paymentStatus},#{createTime})
+    </insert>
+
+    <!--List<Order> selectAllOrder()查询所有订单信息-->
+    <select id="selectAllOrder" resultMap="listOrder">
+        select id,buyer_name,buyer_phone,buyer_address,total_money,order_status,payment_status,create_time
+        from order_form
+    </select>
+
+    <!--List<Order> selectByPaymentStatus(Integer paymentStatus)根据支付状态查询订单信息-->
+    <select id="selectByPaymentStatus" resultMap="listOrder">
+        select id,buyer_name,buyer_phone,buyer_address,total_money,order_status,payment_status,create_time
+        from order_form
+        where payment_status = #{paymentStatus}
+    </select>
+
+    <!--Order selectById(Integer id)根据id查询订单信息-->
+    <select id="selectById" resultType="com.zhoujixing.entity.Order">
+        select id,buyer_name,buyer_phone,buyer_address,total_money,order_status,payment_status,create_time
+        from order_form
+        where id = #{id}
+    </select>
+
+    <!--int updateOrder(Order order)修改订单信息-->
+    <update id="updateOrder" parameterType="com.zhoujixing.entity.Order">
+        update order_form
+        <set>
+            <if test="buyerName !=null">buyer_name = #{buyerName},</if>
+            <if test="buyerPhone !=null">buyer_phone = #{buyerPhone},</if>
+            <if test="buyerAddress !=null">buyer_address = #{buyerAddress},</if>
+            <if test="totalMoney !=null">total_money = #{totalMoney},</if>
+            <if test="orderStatus !=null">order_status = #{orderStatus},</if>
+            <if test="paymentStatus !=null">payment_status = #{paymentStatus},</if>
+            <if test="createTime !=null">create_time = #{createTime}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--int deleteOrder(Integer id)根据id删除订单信息-->
+    <delete id="deleteOrder">
+        delete from order_form
+        where id = #{id}
+    </delete>
+
+</mapper>
