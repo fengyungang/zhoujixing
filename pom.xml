@@ -14,6 +14,7 @@
     <module>zhoujixing-crm</module>
       <module>zhoujixing-cangku</module>
       <module>zhoujixing-restaurant</module>
+      <module>zhoujixing-pay</module>
 
   </modules>
 
