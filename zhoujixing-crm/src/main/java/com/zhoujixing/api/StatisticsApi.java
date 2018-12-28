@@ -26,7 +26,6 @@ public class StatisticsApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/weekShowO")
     public Result weekShowO() {
         return statisticsLogic.getLastWeekStackedLineChartByDayXNumYCodeL();
@@ -43,7 +42,6 @@ public class StatisticsApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/weekShowT")
     public Result weekShowT(Boolean smooth) {
         return statisticsLogic.getLastWeekBasicOrSmoothedLineChartBydayXSumY(smooth);
@@ -58,7 +56,6 @@ public class StatisticsApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/qikShowO")
     public Result qikShowO() {
         return statisticsLogic.getSevenDaysStackedLineChartByDayXNumYCodeL();
@@ -74,7 +71,6 @@ public class StatisticsApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/qikShowT")
     public Result qikShowT(Boolean smooth) {
         return statisticsLogic.getSevenDaysBasicOrSmoothedLineChartBydayXSumY(smooth);
@@ -89,7 +85,6 @@ public class StatisticsApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/monthShowO")
     public Result monthShowO() {
         return statisticsLogic.getLastMonthStackedLineChartByDayXNumYCodeL();
@@ -106,7 +101,6 @@ public class StatisticsApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/monthShowT")
     public Result monthShowT(Boolean smooth) {
         return statisticsLogic.getLastMonthBasicOrSmoothedLineChartBydayXSumY(smooth);
@@ -123,7 +117,6 @@ public class StatisticsApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/hourShowO")
     public Result hourShowO(String start,String end) {
         return statisticsLogic.getHourStackedLineChartByDayXNumYCodeL(start,end);
@@ -142,7 +135,6 @@ public class StatisticsApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/hourShowT")
     public Result hourShowT(Boolean smooth,String start,String end) {
         return statisticsLogic.getHourBasicOrSmoothedLineChartBydayXSumY(smooth,start,end);
@@ -161,7 +153,6 @@ public class StatisticsApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/spaceShow")
     public Result spaceShow(Boolean smooth,String start,String end) {
         return statisticsLogic.getDayBasicOrSmoothedLineChartByCodeXSumY(smooth,start,end);

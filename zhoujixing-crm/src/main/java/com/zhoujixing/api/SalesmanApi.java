@@ -33,7 +33,6 @@ public class SalesmanApi extends BaseApi{
             @ApiImplicitParam(name = "salesman_password", value = "密码", required = true, dataType = "String", paramType = "form")
 
     })
-    @ResponseBody
     @PostMapping("/addSalesman")
     public Result addSalesman(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                       SalesmanModel salesmanModel)
@@ -51,7 +50,6 @@ public class SalesmanApi extends BaseApi{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "salesman_id", value = "销售人员表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @DeleteMapping("/delSalesman")
     public Result delSalesman(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                               Integer salesman_id)
@@ -69,7 +67,6 @@ public class SalesmanApi extends BaseApi{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "salesman_id", value = "销售人员表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @PutMapping("/updSalesman")
     public Result updSalesman(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                               SalesmanModel salesmanModel)
@@ -98,7 +95,6 @@ public class SalesmanApi extends BaseApi{
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/selASalesman")
     public Result selASalesman(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                Integer salesman_parent_id,String salesman_name,String salesman_phone_number, String salesman_create_time ,Integer pageIndex,Integer pageSize)
@@ -116,7 +112,6 @@ public class SalesmanApi extends BaseApi{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "salesman_id", value = "销售人员信息表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/selOSalesman")
     public Result selOSalesman(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                Integer salesman_id)
@@ -138,7 +133,6 @@ public class SalesmanApi extends BaseApi{
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/leaderGetBySalesman")
     public Result leaderGetBySalesman(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                         Integer salesman_parent_id,Integer pageIndex,Integer pageSize)
@@ -158,7 +152,6 @@ public class SalesmanApi extends BaseApi{
             @ApiImplicitParam(name = "salesman_id", value = "销售人员信息表主键id", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "salesman_parent_id", value = "身份标识（可以为空，当为0时是组长，为其他值时是所属组长）", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @PutMapping("/leaderGiveRole")
     public Result leaderGiveRole(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                   Integer salesman_id,Integer salesman_parent_id)
