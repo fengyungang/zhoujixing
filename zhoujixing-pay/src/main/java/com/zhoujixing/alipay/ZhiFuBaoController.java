@@ -7,7 +7,6 @@ import com.zhoujixing.utils.alipay.conf.AlipayConf;
 import com.zhoujixing.utils.alipay.conn.AlipayTradeConn;
 import com.zhoujixing.utils.alipay.request.bean.AlipayTradePay;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -23,49 +22,39 @@ public class ZhiFuBaoController {
     @Autowired
     private AlipayConf alipayConf;
 
-    @RequestMapping("saoma1")
-    public Object saoma1(String id) throws AlipayApiException {
-
-        String a = "{" +
-                "    \"out_trade_no\":\""+CodeUtils.getPayId()+"\"," +
-                "    \"scene\":\"bar_code\"," +
-                "    \"auth_code\":\""+id+"\"," +
-                "    \"subject\":\"Iphone6 16G\"," +
-                "    \"timeout_express\":\"2m\"," +
-                "    \"total_amount\":\"88.88\"" +
-                "  }";
-        Gson gson=new Gson();
-        return gson.toJson( alipayTradeConn.pay(null,a));
-
-
-    }
-
-    @RequestMapping("saoma2")
-    public Object saoma2(String id) throws AlipayApiException {
+    /**
+     * 扫码付款接口
+     * @param code 付款码
+     * @param subject 订单主题
+     * @param money 订单金额
+     * @param appToken 授权码
+     * @param seller_id 收款账号
+     * @return
+     * @throws AlipayApiException
+     */
+    @RequestMapping("saoma")
+    public Object saoma(String code,String subject,String money,String appToken,String seller_id) throws AlipayApiException {
 
         AlipayTradePay alipayTradePay = new AlipayTradePay();
         //这里设置付款参数
         //付款码
-        alipayTradePay.setAuth_code(id);
+        alipayTradePay.setAuth_code(code);
         //其他参数
         //设置订单号
         alipayTradePay.setOut_trade_no(CodeUtils.getPayId());
         //支付场景
         alipayTradePay.setScene("bar_code");
         //订单标题
-        alipayTradePay.setSubject("黄金");
+        alipayTradePay.setSubject(subject);
         //该笔订单允许的最晚付款时间
         alipayTradePay.setTimeout_express("2m");
         //金额
-        alipayTradePay.setTotal_amount(new BigDecimal("100.00"));
-
+        alipayTradePay.setTotal_amount(new BigDecimal(money));
+        //收款账号
+        alipayTradePay.setSeller_id(seller_id);
         Gson gson=new Gson();
-        //设置请求参数，并调用alipayTradeConn.pay(null,gson.toJson(alipayTradePay))
-        return gson.toJson( alipayTradeConn.pay(null,gson.toJson(alipayTradePay)));
+        //设置请求参数，并调用
+        return gson.toJson( alipayTradeConn.pay(appToken,gson.toJson(alipayTradePay)));
     }
-    @RequestMapping("conf")
-    public Object conf(){
-        System.out.println(alipayConf.toString());
-        return alipayConf;
-    }
+
 }

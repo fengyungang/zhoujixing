@@ -19,7 +19,7 @@ import org.springframework.context.annotation.PropertySource;
 public class AlipayConf {
 
     //appid
-    @Value("${alipay.appid}")
+    @Value("${alipay.APPID}")
     private String APPID;
 
     //公钥
