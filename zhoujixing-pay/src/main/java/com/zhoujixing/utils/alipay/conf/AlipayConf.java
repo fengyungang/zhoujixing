@@ -15,7 +15,9 @@ import org.springframework.context.annotation.PropertySource;
 
 @Configuration
 @Data
-@PropertySource(value = "classpath:alipay-application.properties")
+/*@PropertySource(value = "classpath:alipay-application.properties")正式环境*/
+//测试环境
+@PropertySource(value = "classpath:alipay-application-dev.properties")
 public class AlipayConf {
 
     //appid

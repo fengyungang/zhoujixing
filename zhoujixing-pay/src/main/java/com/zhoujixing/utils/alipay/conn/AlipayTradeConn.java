@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 /**
- * 支付宝当面付接口连接
+ * 支付宝扫码支付
  */
 @Component
 public class AlipayTradeConn {
@@ -30,15 +30,13 @@ public class AlipayTradeConn {
      */
     public AlipayTradePayResponse pay(String app_auth_token,String bizContent) throws AlipayApiException {
 
-        //打开支付宝接口连接
+        //打开连接
         AlipayClient alipayClient = alipayConf.aClient();
         //新建请求对象,然后把请求参数放到request里
         AlipayTradePayRequest request = new AlipayTradePayRequest();
-        //设置第三方授权码
         request.putOtherTextParam("app_auth_token",app_auth_token);
         //设置请求参数
         request.setBizContent(bizContent);
-        //执行调用，获取返回结果发起请求+
         AlipayTradePayResponse response = alipayClient.execute(request);
         return response;
 
