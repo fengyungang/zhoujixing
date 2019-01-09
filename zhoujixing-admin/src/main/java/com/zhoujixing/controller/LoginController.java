@@ -64,6 +64,11 @@ public class LoginController {
         return "login";
     }
 
+    @RequestMapping("/index")
+    public String index(){
+        return "index";
+    }
+
     /**
      * 登录的方法
      * @param username

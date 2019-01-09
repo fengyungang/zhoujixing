@@ -76,16 +76,17 @@ public class HttpUtils {
                 .build();
         HttpPost httpPost = new HttpPost(url);
         httpPost.setConfig(requestConfig);
-        httpPost.addHeader("Content-Type","text/html; chartest=UTF-8");
+        httpPost.addHeader("Content-Type","text/html; chartset=UTF-8");
+        StringEntity stringEntity =null;
         if (data !=null && data instanceof String){
-            StringEntity stringEntity = new StringEntity(data,"UTF-8");
+            stringEntity = new StringEntity(data,"UTF-8");
             httpPost.setEntity(stringEntity);
         }
         try {
             CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
             HttpEntity httpEntity = httpResponse.getEntity();
             if (httpResponse.getStatusLine().getStatusCode() == 200){
-                String result = EntityUtils.toString(httpEntity);
+                String result = EntityUtils.toString(httpEntity,"UTF-8");
                 return result;
             }
         } catch (IOException e) {
