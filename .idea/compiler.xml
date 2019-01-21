@@ -20,7 +20,6 @@
       <module name="zhoujixing-cangku" target="1.7" />
       <module name="zhoujixing-crm" target="1.7" />
       <module name="zhoujixing-easyui" target="1.7" />
-      <module name="zhoujixing-fyg" target="1.7" />
       <module name="zhoujixing-pay" target="1.7" />
       <module name="zhoujixing-restaurant" target="1.7" />
     </bytecodeTargetLevel>
@@ -31,7 +30,6 @@
       <module name="zhoujixing-cangku" options="-parameters" />
       <module name="zhoujixing-crm" options="-parameters" />
       <module name="zhoujixing-easyui" options="-parameters" />
-      <module name="zhoujixing-fyg" options="-parameters" />
       <module name="zhoujixing-pay" options="-parameters" />
       <module name="zhoujixing-restaurant" options="-parameters" />
     </option>
