@@ -3,8 +3,10 @@ package com.zhoujixing.service;
 
 import com.zhoujixing.entity.SysMenuEntity;
 import com.zhoujixing.entity.SysUserEntity;
+import com.zhoujixing.utils.PageUtils;
 
 import java.util.List;
+import java.util.Map;
 
 public interface SysUserService {
     /**
@@ -54,4 +56,31 @@ public interface SysUserService {
      * @return
      */
     List<SysUserEntity> getPageUser(int page,int rows);
+
+    /**
+     * 根据传入的条件获得对应的队形
+     * @param sysUserEntity
+     * @return
+     */
+    SysUserEntity findByUser(SysUserEntity sysUserEntity);
+
+    /**
+     * 用户修改密码的方法
+     * @param user
+     * @return
+     */
+    int updatepassword(SysUserEntity user);
+
+    /**
+     * 获得用户的总条数
+     * @return
+     */
+    int count();
+
+    /**
+     * 用户更新的方法
+     * @param userEntity
+     * @return
+     */
+    int userUpdate(SysUserEntity userEntity);
 }

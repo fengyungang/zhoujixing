@@ -6,9 +6,16 @@ import java.util.List;
 
 public interface SysCityService {
     /**
-     * 省 市 县 区  查找方法
-     * @param cityEntity
+     * 查找所有省的方法
+     *
      * @return
      */
-    List<SysCityEntity> getCityList(SysCityEntity cityEntity);
+    List<SysCityEntity> getCityList();
+
+    /**
+     * 获得市县区的方法
+     * @param parentId
+     * @return
+     */
+    List<SysCityEntity> SysCityEntity(String parentId);
 }

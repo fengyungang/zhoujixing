@@ -9,9 +9,16 @@ import java.util.List;
 public interface CityMapper {
 
     /**
-     * 省 市 县 区  查找方法
-     * @param cityEntity
+     * 获得全国省的方法
      * @return
      */
-    List<SysCityEntity> getCityList(SysCityEntity cityEntity);
+    List<SysCityEntity> getCityList();
+
+    /**
+     * 获得市 县 区 的方法
+     * @param parentId
+     * @return
+     */
+    List<SysCityEntity> getCity(String parentId);
+
 }

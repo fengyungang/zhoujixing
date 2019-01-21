@@ -18,33 +18,12 @@
         <result property="pinyin" column="pinyin"/>
         <result property="state" column="state"/>
     </resultMap>
-
-    <sql id="selecttable">
-        id,name,parentid,xpath,shortname,leveltype,citycode,zipcode,lon,lat,pinyin,state
-    </sql>
-
-    <sql id="inserttable">
-        (name,parentid,xpath,shortname,leveltype,citycode,zipcode,lon,lat,pinyin,state)
-    </sql>
-
-    <select id="getCityList" parameterType="com.zhoujixing.entity.SysCityEntity" resultMap="sysCityMap">
-        select <include refid="selecttable"> </include> from sys_city
-        <where>
-          <if test="parentid !=null">
-              and parentid = #{parentid}
-          </if>
-          <if test="leveltype != null">
-              and leveltype = #{leveltype}
-          </if>
-          <if test="name != null and name != ''">
-              and name like CONCAT('%',#{name},'%')
-          </if>
-          <if test="shortname != null and shortname != ''">
-              and shortname like CONCAT('%',#{shortname},'%')
-          </if>
-          <if test="pinyin !=null and pinyin != ''">
-              and pinyin = #{pinyin}
-          </if>
-        </where>
+    <select id="getCityList" resultMap="sysCityMap">
+        select * from sys_city where levelType = 1
     </select>
+
+    <select id="getCity" resultMap="sysCityMap" parameterType="java.lang.String">
+        select * from sys_city where parentId = #{parentId}
+    </select>
+
 </mapper>
