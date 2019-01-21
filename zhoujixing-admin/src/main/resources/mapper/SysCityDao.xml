@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.zhoujixing.mapper">
+<mapper namespace="com.zhoujixing.mapper.CityMapper">
 
 	<!-- 可根据自己的需求，是否要使用 -->
     <resultMap type="com.zhoujixing.entity.SysCityEntity" id="sysCityMap">
@@ -18,33 +18,12 @@
         <result property="pinyin" column="pinyin"/>
         <result property="state" column="state"/>
     </resultMap>
-
-    <sql id="selecttable">
-        id,name,parentId,xpath,shortName,levelType,cityCode,zipCode,lon,lat,pinyin,state
-    </sql>
-
-    <sql id="inserttable">
-        (name,parentId,xpath,shortName,levelType,cityCode,zipCode,lon,lat,pinyin,state)
-    </sql>
-
-    <select id="cityList" parameterType="com.zhoujixing.entity.SysCityEntity" resultMap="sysCityMap">
-        select <include refid="selecttable"/> from sys_city
-        <where>
-          <if test="parentId !=null and parentId != ''">
-              and parentId = #{parentId}
-          </if>
-          <if test="levelType != null and levelType != ''">
-              and levelType = #{levelType}
-          </if>
-          <if test="name != null and name != ''">
-              and name like CONCAT('%',#{name},'%')
-          </if>
-          <if test="shortName != null and shortName != ''">
-              and shortName like CONCAT('%',#{shortName},'%')
-          </if>
-          <if test="pinyin !=null and pinyin != ''">
-              and pinyin = #{pinyin}
-          </if>
-        </where>
+    <select id="getCityList" resultMap="sysCityMap">
+        select * from sys_city where levelType = 1
     </select>
+
+    <select id="getCity" resultMap="sysCityMap" parameterType="java.lang.String">
+        select * from sys_city where parentId = #{parentId}
+    </select>
+
 </mapper>

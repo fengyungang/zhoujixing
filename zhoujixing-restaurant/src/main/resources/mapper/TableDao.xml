@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.mapper.TableMapper">
+
+    <resultMap id="listTable" type="com.zhoujixing.entity.Table">
+        <result property="id" column="id"/>
+        <result property="buyerId" column="buyer_id"/>
+        <result property="capacity" column="capacity"/>
+        <result property="depict" column="depict"/>
+        <result property="tableStatus" column="table_status"/>
+    </resultMap>
+
+    <!--int insertTable(Table table)插入餐桌信息-->
+    <insert id="insertTable" useGeneratedKeys="true" keyProperty="id" keyColumn="id" parameterType="com.zhoujixing.entity.Table">
+        insert into tables (buyer_id, capacity, depict, table_status) values
+        (#{buyerId},#{capacity},#{depict},#{tableStatus})
+    </insert>
+
+    <!--List<Table> selectAllTable()获得所有餐桌信息-->
+    <select id="selectAllTable" resultMap="listTable">
+          select id,buyer_id,capacity, depict, table_status
+          from tables
+    </select>
+
+    <!--List<Table> selectByTableStatus(Integer tableStatus)根据状态查询餐桌信息-->
+    <select id="selectByTableStatus" resultMap="listTable">
+        select id,buyer_id, capacity, depict, table_status
+        from tables
+        where table_status = #{tableStatus}
+    </select>
+
+    <!--Table selectByBuyerId(Integer buyerId)根据订单编号查询餐桌信息-->
+    <select id="selectByBuyerId" resultMap="listTable">
+        select id,buyer_id, capacity, depict, table_status
+        from tables
+        where buyer_id = #{buyerId}
+    </select>
+
+    <!--Table selectById(Integer id)根据订单编号查询餐桌信息-->
+    <select id="selectById" resultMap="listTable">
+        select id,buyer_id, capacity, depict, table_status
+        from tables
+        where id = #{id}
+    </select>
+
+    <!--int updateTable(Table table)修改餐桌信息-->
+    <update id="updateTable" parameterType="com.zhoujixing.entity.Table">
+        update tables
+        <set>
+            <if test="buyerId !=null">buyer_id = #{buyerId},</if>
+            <if test="capacity !=null">capacity = #{capacity},</if>
+            <if test="depict !=null">depict = #{depict},</if>
+            <if test="tableStatus !=null">table_status = #{tableStatus}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <!--int deleteTable(Integer id)根据id删除餐桌信息-->
+    <delete id="deleteTable">
+        delete from tables
+        where id = #{id}
+    </delete>
+</mapper>

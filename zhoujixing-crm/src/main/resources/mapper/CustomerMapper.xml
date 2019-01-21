@@ -103,7 +103,7 @@
                 customer_del = #{customer_del},
             </if>
             <if test="word_book_code != null">
-                word_book_code = #{word_book_code},
+                word_book_code = #{word_book_code}
             </if>
         </set>
         WHERE customer_id = #{customer_id}

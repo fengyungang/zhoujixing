@@ -33,8 +33,9 @@ public interface MenuMapper {
      * @param userid
      * @return
      */
-    List<SysMenuEntity> byUserIdListMen(long userid);
+    List<Long> UserIdListMen(long userid);
 
+    List<SysMenuEntity> byUserIdListMen(long userid);
     /**
      * 获得所有菜单的方法
      * @return
@@ -47,4 +48,11 @@ public interface MenuMapper {
      * @return
      */
     int delMenu(String id);
+
+    /**
+     * 根据父类菜单，查询子菜单
+     * @param parentId
+     * @return
+     */
+    List<SysMenuEntity> getistParentId(Long parentId);
 }

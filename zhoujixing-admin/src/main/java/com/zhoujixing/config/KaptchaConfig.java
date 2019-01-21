@@ -36,13 +36,13 @@ public class KaptchaConfig {
         //图片的样式
         properties.setProperty("kaptcha.obscurificator.impl","com.google.code.kaptcha.impl.WaterRipple");
         //干扰颜色，合法值： r,g,b 或者 white,black,blue.
-        properties.setProperty("kaptcha.noise.color","black");
+        //properties.setProperty("kaptcha.noise.color","black");
         //干扰实现类
-        properties.setProperty("kaptcha.noise.impl","com.google.code.kaptcha.impl.DefaultNoise");
+       // properties.setProperty("kaptcha.noise.impl","com.google.code.kaptcha.impl.DefaultNoise");
         //背景颜色渐变，开始颜色
-        properties.setProperty("kaptcha.background.clear.from","185,56,213");
+        ///properties.setProperty("kaptcha.background.clear.from","185,56,213");
         //背景颜色渐变，结束颜色
-        properties.setProperty("kaptcha.background.clear.to","white");
+        //properties.setProperty("kaptcha.background.clear.to","white");
         //文字间隔
         properties.setProperty("kaptcha.textproducer.char.space","3");
 

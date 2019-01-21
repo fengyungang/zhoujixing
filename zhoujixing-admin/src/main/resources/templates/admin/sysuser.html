@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="header.html">
+    <title>后台管理用户表</title>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">角色</div>
+                <div class="col-sm-10">
+                    <select class="form-control" id="roled" v-model="sysUser.roleid" placeholder="角色ID">
+                        <option >请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">用户账号</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="sysUser.loginname" placeholder="用户账号"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">用户密码</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="sysUser.loginpass" placeholder="用户密码(SHA-256加密长64位)"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">真实姓名</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="sysUser.realname" placeholder="真实姓名"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">性别</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="sysUser.sex" placeholder="性别（0：女；1：男；2：保密）"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">所属省份</div>
+                <div class="col-sm-10">
+                    <select class="form-control" id="sheng" v-model="sysUser.province" placeholder="所属省份" @change="city">
+                        <option>请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">所属城市</div>
+                <div class="col-sm-10">
+                    <select class="form-control" id="city" v-model="sysUser.city" placeholder="所属城市" @change="district">
+                        <option>请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">所属区县</div>
+                <div class="col-sm-10">
+                    <select class="form-control" id="xian" v-model="sysUser.area" placeholder="所属区县">
+                        <option>请选择</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">所属企业</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="sysUser.companyid" placeholder="所属企业"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">电子邮箱</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="sysUser.email" placeholder="电子邮箱"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">备注</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="sysUser.remark" placeholder="备注"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">用户状态</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" v-model="sysUser.state" placeholder="用户状态（0：不可用；1：可用；2：已禁用；-1：已删除）"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+<script src="/zhoujixing/static/js/admin/sysuser.js"></script>
+</body>
+</html>

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>登录页面</title>
+    <link rel="stylesheet" href="/zhoujixing/static/css/login.css">
+    <script type="text/javascript" src="/zhoujixing/static/jquery/jquery-3.3.1.js"></script>
+    <script type="text/javascript" src="/zhoujixing/static/libs/vue.min.js"></script>
+    <script type="text/javascript" src="/zhoujixing/static/js/denglu.js"></script>
+</head>
+<body>
+<div class="banner" id="banner" v-cloak>
+
+    <div class="Sign-in">
+        <div class="content">
+            <div class="hear">
+                <h2 class="h2">用户登录</h2>
+
+            </div>
+            <div class="in">
+                <span class="on"></span>
+                <span class="ona">欢迎登录后台管理系统</span>
+                <span class="on">{{errorMsg}}</span>
+            </div>
+            <form class="input" id="myform" method="post" action="/zhoujixing/login">
+                <input class="img" type="text" placeholder="用户名" id="username" v-model="username">
+                <input class="imga" type="password" placeholder="密码" id="password" v-model="password">
+                <div class="dx">
+                    <input type="checkbox" name="checkbox" checked="checked" class="checkbox"><span class="sss">记住我</span>
+                    <div class="ddd clearfix">
+                        <div class="wj">
+                            <img  src="/zhoujixing/static/images/05_11.png" alt="">
+                            <span class="sp">忘记密码</span>
+                        </div>
+                    </div>
+                </div>
+                <input type="text" placeholder="请输入验证码" id="yanzhengma" v-model="yanzhengma">
+                <div class="yanzhengm">
+                    <img id="tupian" class="wh" :src="src"  @click="refreshCode" style="display: inline">
+                </div>
+                <button  type="button" @click="login">登录</button>
+            </form>
+        </div>
+    </div>
+    <div id="div">河北洲际星科技有限公司</div>
+</div>
+<script type="text/javascript">
+var vm = new Vue({
+    el:'#banner',
+    data:{
+        username:'',
+        password:'',
+        yanzhengma:'',
+        errorMsg:'',
+        src:'defaultKaptcha'
+    },
+    beforeCreate:function () {
+        if (self != top){
+            top.location.href=self.location.href;
+        }
+    },
+    methods:{
+        refreshCode:function () {
+            this.src = "defaultKaptcha?t="+$.now();
+        },
+        login:function (event) {
+            $.post("login",{username:vm.username,password:vm.password,yanzhengma:vm.yanzhengma},
+                function (data) {
+                   if (data.code ==200){
+                       parent.location.href='index';
+                   }else {
+                       vm.error = true;
+                        alert(data.msg);
+                        vm. refreshCode();
+                   }
+                },"json");
+        }
+    }
+});
+</script>
+</body>
+</html>

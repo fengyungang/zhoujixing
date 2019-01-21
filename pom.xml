@@ -13,8 +13,8 @@
     <module>zhoujixing-easyui</module>
     <module>zhoujixing-crm</module>
     <module>zhoujixing-cangku</module>
-    <module>zhoujixing-toup</module>
-    <module>zhoujixing-BackstageSoft</module>
+    <module>zhoujixing-restaurant</module>
+    <module>zhoujixing-pay</module>
 
   </modules>
 
@@ -112,10 +112,17 @@
       <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
       <version>1.1.0</version>
     </dependency>
+    <!-- 验证jar -->
     <dependency>
       <groupId>com.github.penggle</groupId>
       <artifactId>kaptcha</artifactId>
       <version>2.3.2</version>
+    </dependency>
+    <!-- https://mvnrepository.com/artifact/com.alipay.sdk/alipay-sdk-java -->
+    <dependency>
+      <groupId>com.alipay.sdk</groupId>
+      <artifactId>alipay-sdk-java</artifactId>
+      <version>3.4.27.ALL</version>
     </dependency>
   </dependencies>
 

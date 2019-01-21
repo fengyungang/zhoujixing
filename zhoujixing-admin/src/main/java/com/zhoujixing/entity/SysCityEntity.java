@@ -87,18 +87,15 @@ public class SysCityEntity implements Serializable {
 	public String getName() {
 		return name;
 	}
-	/**
-	 * 设置：上级ID
-	 */
-	public void setParentid(Long parentid) {
-		this.parentid = parentid;
-	}
-	/**
-	 * 获取：上级ID
-	 */
+
 	public Long getParentid() {
 		return parentid;
 	}
+
+	public void setParentid(Long parentid) {
+		this.parentid = parentid;
+	}
+
 	/**
 	 * 设置：
 	 */

@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.mapper.CooperateMapper">
+    <!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        cooperate(cooperate_corporate_name,cooperate_subsector,cooperate_province,cooperate_city,cooperate_area,cooperate_linkman,cooperate_phone,cooperate_qq,cooperate_state,cooperate_create_time)
+        VALUES
+        (#{cooperate_corporate_name},#{cooperate_subsector},#{cooperate_province},#{cooperate_city},#{cooperate_area},#{cooperate_linkman},#{cooperate_phone},#{cooperate_qq},#{cooperate_state},#{cooperate_create_time})
+    </insert>
+    <!--根据id查询一条信息-->
+    <select id="getById" resultType="com.zhoujixing.entity.CooperateEntity">
+		SELECT * FROM cooperate WHERE cooperate_id = #{0}
+	</select>
+    <!--查询所有信息-->
+    <select id="selA" parameterType="map" resultType="com.zhoujixing.entity.CooperateEntity">
+        SELECT cooperate_id,cooperate_corporate_name,cooperate_subsector,cooperate_province,cooperate_city,cooperate_area,cooperate_linkman,cooperate_phone,cooperate_qq,cooperate_state,cooperate_create_time FROM cooperate
+        <where>
+            <if test="cooperate_id != null">
+                AND cooperate_id=#{cooperate_id}
+            </if>
+            <if test="cooperate_corporate_name != null and cooperate_corporate_name != ''">
+                AND cooperate_corporate_name like CONCAT('%', #{cooperate_corporate_name}, '%')
+            </if>
+            <if test="cooperate_subsector != null and cooperate_subsector != ''">
+                AND cooperate_subsector like CONCAT('%', #{cooperate_subsector} ,'%')
+            </if>
+            <if test="cooperate_province != null and cooperate_province != ''">
+                AND cooperate_province like CONCAT('%', #{cooperate_province}, '%')
+            </if>
+            <if test="cooperate_city != null and cooperate_city != ''">
+                AND cooperate_city like CONCAT('%', #{cooperate_city} ,'%')
+            </if>
+            <if test="cooperate_area != null and cooperate_area != ''">
+                AND cooperate_area like CONCAT('%', #{cooperate_area} ,'%')
+            </if>
+            <if test="cooperate_linkman != null and cooperate_linkman != ''">
+                AND cooperate_linkman like CONCAT('%', #{cooperate_linkman}, '%')
+            </if>
+            <if test="cooperate_phone != null and cooperate_phone != ''">
+                AND cooperate_phone like CONCAT('%', #{cooperate_phone} ,'%')
+            </if>
+            <if test="cooperate_qq != null and cooperate_qq != ''">
+                AND cooperate_qq like CONCAT('%', #{cooperate_qq} ,'%')
+            </if>
+            <if test="cooperate_state != null">
+                AND cooperate_state=#{cooperate_state}
+            </if>
+            <if test="cooperate_create_time != null and cooperate_create_time != ''">
+                AND Date(cooperate_create_time) =  Date(#{cooperate_create_time})
+            </if>
+        </where>
+    </select>
+    <!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE cooperate
+        <set>
+            <if test="cooperate_state != null">
+                cooperate_state = #{cooperate_state}
+            </if>
+        </set>
+        WHERE cooperate_id = #{cooperate_id}
+    </update>
+    <!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">DELETE FROM cooperate WHERE cooperate_id = #{0}</delete>
+
+</mapper>
+

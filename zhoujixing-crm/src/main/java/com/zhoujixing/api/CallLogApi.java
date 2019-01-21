@@ -33,7 +33,6 @@ public class CallLogApi extends BaseApi{
             @ApiImplicitParam(name = "call_log_customer_feedback", value = "客户反馈", required = true, dataType = "String", paramType = "form")
 
     })
-    @ResponseBody
     @PostMapping("/addCallLog")
     public Result addCallLog(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                               CallLogModel callLogModel)
@@ -65,7 +64,6 @@ public class CallLogApi extends BaseApi{
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/selACallLog")
     public Result selACallLog(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                Integer customer_id, Integer salesman_id, String call_log_content,String call_log_customer_feedback, String call_log_create_time,String call_log_contact_time,Integer pageIndex,Integer pageSize)
@@ -83,7 +81,6 @@ public class CallLogApi extends BaseApi{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "call_log_id", value = "通话记录信息表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/selOCallLog")
     public Result selOCallLog(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                Integer call_log_id)
@@ -101,7 +98,6 @@ public class CallLogApi extends BaseApi{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "call_log_id", value = "通话记录信息表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @PutMapping("/updCallLog")
     public Result updCallLog(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                               CallLogModel callLogModel)

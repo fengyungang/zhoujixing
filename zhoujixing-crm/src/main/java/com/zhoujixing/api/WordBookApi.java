@@ -33,7 +33,6 @@ public class WordBookApi extends BaseApi{
             @ApiImplicitParam(name = "word_book_state", value = "字典表状态", required = false, dataType = "String", paramType = "form")
 
     })
-    @ResponseBody
     @PostMapping("/addWordBook")
     public Result addWordBook(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                               WordBookModel wordBookModel)
@@ -63,7 +62,6 @@ public class WordBookApi extends BaseApi{
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/selAWordBook")
     public Result selAWordBook(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                               Integer word_book_code, String word_book_name, String word_book_type,String word_book_state, String word_book_create_time,Integer pageIndex,Integer pageSize)
@@ -81,7 +79,6 @@ public class WordBookApi extends BaseApi{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "word_book_id", value = "字典表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/selOWordBook")
     public Result selOWordBook(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                               Integer word_book_id)
@@ -99,7 +96,6 @@ public class WordBookApi extends BaseApi{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "word_book_id", value = "字典表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @PutMapping("/updWordBook")
     public Result updWordBook(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                              WordBookModel wordBookModel)
@@ -117,7 +113,6 @@ public class WordBookApi extends BaseApi{
     @ApiImplicitParams({
             @ApiImplicitParam(name = "word_book_id", value = "字典表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @DeleteMapping("/delWordBook")
     public Result delWordBook(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                               Integer word_book_id)
