@@ -15,7 +15,7 @@
     <module>zhoujixing-cangku</module>
     <module>zhoujixing-restaurant</module>
     <module>zhoujixing-pay</module>
-
+    <module>zhoujixing-vote</module>
   </modules>
 
   <name>zhoujixing</name>
