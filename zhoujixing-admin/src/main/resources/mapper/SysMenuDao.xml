@@ -47,6 +47,13 @@
     <select id="byUserIdListMen" parameterType="java.lang.Long" resultMap="sysMenuMap">
         select m.* from sys_menu_role r left join sys_menu m on r.menuId = m.id where roleId = #{userid}
     </select>
+    <select id="UserIdListMen" parameterType="java.lang.Long" resultMap="sysMenuMap">
+        select m.id from sys_menu_role r left join sys_menu m on r.menuId = m.id where roleId = #{userid}
+    </select>
+
+    <select id="getistParentId" parameterType="java.lang.Long" resultMap="sysMenuMap">
+      select * from sys_menu where parentId = #{parentId} order by orderNum asc
+    </select>
 
     <select id="getMenuList" resultMap="sysMenuMap" parameterType="com.zhoujixing.entity.SysMenuEntity">
         select <include refid="selectTableSql"/> from sys_menu

@@ -36,7 +36,6 @@ public class CustomerApi extends BaseApi {
             @ApiImplicitParam(name = "customer_address", value = "家庭住址", required = false, dataType = "String", paramType = "form")
 
     })
-    @ResponseBody
     @PostMapping("/addCustomer")
     public Result addCustomer(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                       CustomerModel customerModel)
@@ -54,7 +53,6 @@ public class CustomerApi extends BaseApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "customer_id", value = "客户表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @PutMapping("/delCustomer")
     public Result delCustomer(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                       Integer customer_id)
@@ -88,7 +86,6 @@ public class CustomerApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/selACustomer")
     public Result selACustomer(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                Integer salesman_id, String customer_name, String customer_phone_number,String customer_sex,Integer customer_del, String customer_create_time,Integer word_book_code,Integer pageIndex,Integer pageSize)
@@ -107,7 +104,6 @@ public class CustomerApi extends BaseApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "customer_id", value = "客户表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @PutMapping("/updCustomer")
     public Result updCustomer(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                               CustomerModel customerModel)
@@ -125,7 +121,6 @@ public class CustomerApi extends BaseApi {
     @ApiImplicitParams({
             @ApiImplicitParam(name = "customer_id", value = "客户信息表主键id", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/selOCustomer")
     public Result selOCustomer(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                Integer customer_id)
@@ -147,7 +142,6 @@ public class CustomerApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/salesmanGetByCustomer")
     public Result salesmanGetByCustomer(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                Integer salesman_id,Integer pageIndex,Integer pageSize)
@@ -167,7 +161,6 @@ public class CustomerApi extends BaseApi {
             @ApiImplicitParam(name = "customer_id", value = "客户表主键id", required = true, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "salesman_id", value = "销售人员id（关联外键）", required = true, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @PutMapping("/salesmanGiveWay")
     public Result salesmanGiveWay(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                               Integer customer_id,Integer salesman_id)
@@ -197,7 +190,6 @@ public class CustomerApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/leaderBySalesmanByCustomer")
     public Result leaderBySalesmanByCustomer(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                String salesman_name, String salesman_phone_number, String customer_name,String customer_phone_number,Integer salesman_parent_id, Integer pageIndex,Integer pageSize)
@@ -231,7 +223,6 @@ public class CustomerApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/kehuAxiaoshouAzidian")
     public Result kehuAxiaoshouAzidian(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                Integer salesman_id, String customer_name, String customer_phone_number,String customer_sex,Integer customer_del, String customer_create_time,Integer word_book_code,Integer pageIndex,Integer pageSize)
@@ -263,7 +254,6 @@ public class CustomerApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/leaderBySalesmanByCustomerName")
     public Result leaderBySalesmanByCustomerName(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                              String salesman_name, String salesman_phone_number, String customer_name,String customer_phone_number,Integer salesman_parent_id,Integer word_book_code, Integer pageIndex,Integer pageSize)
@@ -294,7 +284,6 @@ public class CustomerApi extends BaseApi {
             @ApiImplicitParam(name = "pageIndex", value = "页码", required = false, dataType = "Integer", paramType = "query"),
             @ApiImplicitParam(name = "pageSize", value = "每页数量", required = false, dataType = "Integer", paramType = "query")
     })
-    @ResponseBody
     @GetMapping("/leaderGetAllInfo")
     public Result rechargeRecordList(@RequestHeader(name = "Authorization", defaultValue = "token") String token,
                                            String salesman_name, String salesman_phone_number, String customer_name,String customer_phone_number,Integer salesman_parent_id,Integer word_book_code, Integer pageIndex,Integer pageSize)

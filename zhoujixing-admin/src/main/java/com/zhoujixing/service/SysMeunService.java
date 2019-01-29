@@ -25,4 +25,11 @@ public interface SysMeunService {
      * @return
      */
     int delMenu(String id);
+
+    /***
+     * 根据用户编号获得所有菜单
+     * @param userid
+     * @return
+     */
+    List<SysMenuEntity> getUserMenuList(Long userid);
 }

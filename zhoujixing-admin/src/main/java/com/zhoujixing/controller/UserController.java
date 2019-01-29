@@ -1,5 +1,6 @@
 package com.zhoujixing.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhoujixing.config.KaptchaConfig;
 import com.zhoujixing.entity.SysMenuEntity;
 import com.zhoujixing.service.SysUserService;
@@ -10,6 +11,7 @@ import com.zhoujixing.shiro.JWTUtil;
 import com.zhoujixing.shiro.ResponseBean;
 import com.zhoujixing.shiro.UnauthorizedException;
 import com.zhoujixing.utils.IpUtil;
+import com.zhoujixing.utils.PageUtils;
 import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authz.annotation.RequiresAuthentication;
@@ -20,17 +22,12 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.bind.annotation.RestController;
 
-import javax.imageio.ImageIO;
-import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import java.awt.image.BufferedImage;
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class UserController {
@@ -84,36 +81,65 @@ public class UserController {
 
 
     @RequestMapping("/addUser")
-    @ApiOperation(value = "添加用户的方法",notes = "需要传用户所有信息")
-    public String addUser(SysUserEntity userEntity){
+    @ResponseBody
+    public ResponseBean addUser(@RequestParam String user,HttpServletRequest request){
+        ObjectMapper mapper = new ObjectMapper();
+        SysUserEntity userEntity = null;
+        try {
+            userEntity= mapper.readValue(user,SysUserEntity.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        userEntity.setCreatetime(new Date());
+        userEntity.setLastlogintime(new Date());
+        String IP = IpUtil.getIP(request);
+        userEntity.setLastloginip(IP);
         int a = userService.addUser(userEntity);
         if (a!=0){
-            return "添加成功";
+            return new ResponseBean(200,"添加成功",null);
         }else {
-            return "798";
+            return new ResponseBean(500,"添加失败",null);
+        }
+    }
+
+    @RequestMapping("/userupdate")
+    @ResponseBody
+    public ResponseBean  userUpdate(@RequestParam SysUserEntity userEntity){
+        int a = userService.userUpdate(userEntity);
+        if (a>0){
+            return new ResponseBean(200,"更新成功",null);
+        }else {
+            return new ResponseBean(500,"更新失败",null);
         }
     }
 
     @RequestMapping("/getUserList")
     @ResponseBody
-    @ApiOperation(value = "获得所有用户的信息",notes = "默认获得所有用户的新")
-    public List<SysUserEntity> getUserList(@RequestParam("page") int page,
-                                           @RequestParam("rows") int rows){
-        List<SysUserEntity> userEntities =userService.getPageUser(page,rows);
-        return  userEntities;
+    public PageUtils getUserList(@RequestParam Map<String,Object> params){
+        String page = (String) params.get("page");
+        String rows = (String) params.get("limit");
+        System.out.println(params);
+        List<SysUserEntity> userEntities =userService.getPageUser(Integer.parseInt(page),Integer.parseInt(rows));
+        int count = userService.count();
+        PageUtils pageUtils =new PageUtils(userEntities,count,Integer.parseInt(rows),Integer.parseInt(page));
+        return  pageUtils;
     }
 
     @RequestMapping("/deleUser")
-    @ApiOperation(value="删除",notes="用户删除操作")
-    public String deleUser(@RequestParam("id") String id){
-        long i=Long.parseLong(id);
-        userService.deleteUser(i);
-        return "redirect:getUser";
+    @ResponseBody
+    public ResponseBean deleUser(@RequestParam String userid){
+        long i=Long.parseLong(userid);
+        int j = userService.deleteUser(i);
+        if (j==1){
+            return new ResponseBean(200,"删除成功",null);
+        }else {
+            return new ResponseBean(500,"删除失败",null);
+        }
+
 
     }
 
     @RequestMapping("/findMenuByUserName")
-    @ApiOperation(value = "查询该用户下的所有菜单")
     public List<SysMenuEntity> findMenuByUserName(@RequestParam("username") String username){
         List<SysMenuEntity> list = userService.findMenuByUserName(username);
         return list;
@@ -128,5 +154,33 @@ public class UserController {
         }
     }
 
+    /**
+     * 获得登录用户的信息
+     * @param request
+     * @return
+     */
+    @RequestMapping("/info")
+    @ResponseBody
+    public SysUserEntity getUserinfo(HttpServletRequest request){
+        SysUserEntity sysUserEntity = (SysUserEntity) request.getSession().getAttribute("user");
+        return sysUserEntity;
+    }
 
+    @RequestMapping("/password")
+    public String password(@RequestParam("password") String password,@RequestParam("newPassword") String newPassword){
+        if (newPassword == null || newPassword == ""){
+            return "新密码不能为空";
+        }
+        SysUserEntity sysUserEntity = new SysUserEntity();
+        sysUserEntity.setLoginpass(JWTUtil.sha256(password));
+        SysUserEntity user = userService.findByUser(sysUserEntity);
+        if (user != null){
+            user.setLoginpass(JWTUtil.sha256(newPassword));
+            int i = userService.updatepassword(user);
+            return String.valueOf(i);
+        }else {
+            return "原密码不正确";
+        }
+
+    }
 }

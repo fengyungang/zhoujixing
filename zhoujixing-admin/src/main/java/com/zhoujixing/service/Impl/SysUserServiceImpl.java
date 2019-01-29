@@ -62,4 +62,25 @@ public class SysUserServiceImpl implements SysUserService {
         List<SysUserEntity> list =userMapper.getPageUser(data);
         return list;
     }
+
+    @Override
+    public SysUserEntity findByUser(SysUserEntity sysUserEntity) {
+        List<SysUserEntity> list = userMapper.findByUser(sysUserEntity);
+        return list.get(0);
+    }
+
+    @Override
+    public int updatepassword(SysUserEntity user) {
+        return userMapper.updatepassword(user);
+    }
+
+    @Override
+    public int count() {
+        return userMapper.usercount();
+    }
+
+    @Override
+    public int userUpdate(SysUserEntity userEntity) {
+        return userMapper.userUpdate(userEntity);
+    }
 }

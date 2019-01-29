@@ -1,5 +1,6 @@
 package com.zhoujixing.controller;
 
+import com.google.code.kaptcha.Producer;
 import com.zhoujixing.config.KaptchaConfig;
 import com.zhoujixing.entity.SysUserEntity;
 import com.zhoujixing.service.SysUserService;
@@ -8,13 +9,13 @@ import com.zhoujixing.shiro.JWTUtil;
 import com.zhoujixing.shiro.ResponseBean;
 import com.zhoujixing.shiro.UnauthorizedException;
 import com.zhoujixing.utils.IpUtil;
-import io.swagger.annotations.ApiOperation;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -31,6 +32,8 @@ public class LoginController {
     private SysUserService userService;
     @Autowired
     private KaptchaConfig kaptchaConfig;
+
+    private Producer producer;
 
     @RequestMapping("/defaultKaptcha")
     public void defaultKaptcha(HttpServletRequest request, HttpServletResponse response) throws IOException {
@@ -59,10 +62,7 @@ public class LoginController {
         outputStream.close();
     }
 
-    @RequestMapping("/denglu")
-    public String denglu(){
-        return "login";
-    }
+
 
     /**
      * 登录的方法
@@ -71,16 +71,14 @@ public class LoginController {
      * @return
      */
     @RequestMapping("/login")
+    @ResponseBody
     public ResponseBean login(@RequestParam("username") String username,
                               @RequestParam("yanzhengma") String yanzhengma,
                               @RequestParam("password") String password, HttpServletRequest request){
         SysUserEntity userEntity = userService.findByUserName(username);
         String pwd= JWTUtil.sha256(password);//对密码进行加密
-        Subject subject = SecurityUtils.getSubject();
-        String jwttoken = JWTUtil.sing(username,pwd);
-        subject.login(new JWTToken(jwttoken));
         String str= (String) request.getSession().getAttribute("rightCode");
-        if (yanzhengma.equals(str)){
+        if (!yanzhengma.equals(str)){
             return new ResponseBean(500,"验证码错误",null);
         }
         if (userEntity==null){
@@ -90,6 +88,10 @@ public class LoginController {
             String IP = IpUtil.getIP(request);
             userEntity.setLastloginip(IP);
             int a=userService.updateIP(userEntity);
+            Subject subject = SecurityUtils.getSubject();
+            String jwttoken = JWTUtil.sing(username,pwd);
+            subject.login(new JWTToken(jwttoken));
+            request.getSession().setAttribute("user",userEntity);
             return new ResponseBean(200,"登录成功", JWTUtil.sing(username,pwd)+"+"+a);
         }else {
             throw new UnauthorizedException();

@@ -1,0 +1,152 @@
+* {
+	margin: 0;
+	padding: 0;
+}
+.clearfix::after {
+	content: ".";
+	clear: both;
+	display: block;
+	overflow: hidden;
+	font-size: 0;
+	height: 0;
+}
+
+.clearfix {
+	zoom: 1;
+}
+
+
+.banner {
+	width: 100%;
+	height: 100%;
+	max-width: 1920px;
+	height: 800px;
+	background: url(../images/01.png)no-repeat;
+	overflow: hidden;
+}
+h2 {
+	color: skyblue;
+}
+.Sign-in {
+	width: 25%;
+	height: 50%;
+	background-color: #fff;
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+	margin-top: 8%;
+}
+.content {
+	width: 80%;
+	/* background-color: yellow; */
+	text-align: center;
+	margin-left: auto;
+	margin-right: auto;
+}
+.h2 {
+	display: inline-block;
+	margin: 5% 0;
+}
+.sp {
+	color: #999;
+}
+.in {
+	/* height: 40px; */
+	width: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	text-align: center;
+}
+.on {
+	height: 25px;
+	flex-grow: 1;
+	border-top: 1px solid #999;
+}
+.ona {
+	margin: 0 5%;
+	margin-bottom: 8%;
+}
+input {
+	width: 93%;
+	border-radius: 3px;
+	padding-left: 8%;
+	height: 30px;
+	border: 1px solid #ccc;
+}
+.img {
+	background: url(../images/05_03.png)no-repeat 1px;
+	margin-bottom: 5%;
+}
+.imga {
+	background: url(../images/05_07.png)no-repeat 1px;
+	margin-bottom: 5%;
+}
+.checkbox {
+	/* margin-top: 5px; */
+	width: 20px;
+	float: left;
+}
+.sss {
+	float: left;
+	margin-left: 2%;
+}
+.ddd {
+	/* display: inline-block; */
+	float: right;
+}
+.wj {
+	display: flex;
+	align-items: center;
+}
+button {
+	width: 100%;
+	height: 40px;
+	border-radius: 11px;
+	background: skyblue;
+	color: #fff;
+	font-size: 1em;
+	border: 1px solid #fff;
+	margin-top: 5%;
+}
+#div {
+	text-align: center;
+	color: #666;
+}
+.text {
+	width: 60%;
+	padding: 0;
+	float: left;
+	margin-top: 5%;
+}
+.a1 > img {
+	margin-top: 3%;
+}
+.yanzhengm {
+	    margin-top: 5%;
+	    position: relative;
+}
+.yanzhengm > span {
+	    position: absolute;
+	    display: inline-block;
+	    height: 100%;
+	    margin-top: 3%;
+}
+.yanzhengm > img {
+	    float: left;
+}
+.dx {
+	width: 100%;
+	height: 30px;
+	line-height:30px;
+	overflow:hidden;
+}
+.sp {
+	/* display: inline-block; */
+	height: 100%;
+	text-align: top;
+}
+.wh {
+	margin-top: 20px;
+}
