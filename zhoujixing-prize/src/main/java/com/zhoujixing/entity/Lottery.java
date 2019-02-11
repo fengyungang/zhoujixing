@@ -9,7 +9,7 @@ import java.util.Objects;
 public class Lottery implements Serializable {
 
     private static final long serialVersionUID = 6163071141331307143L;
-    /**/
+
     private Integer id;
 
     //中奖类型
