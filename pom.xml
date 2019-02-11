@@ -16,6 +16,7 @@
     <module>zhoujixing-restaurant</module>
     <module>zhoujixing-pay</module>
     <module>zhoujixing-vote</module>
+      <module>zhoujixing-award</module>
   </modules>
 
   <name>zhoujixing</name>
