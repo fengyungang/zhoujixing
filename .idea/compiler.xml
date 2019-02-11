@@ -28,13 +28,13 @@
   </component>
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
-      <module name="zhoujixing-admin" options="-parameters" />
-      <module name="zhoujixing-cangku" options="-parameters" />
-      <module name="zhoujixing-crm" options="-parameters" />
-      <module name="zhoujixing-easyui" options="-parameters" />
-      <module name="zhoujixing-pay" options="-parameters" />
-      <module name="zhoujixing-restaurant" options="-parameters" />
-      <module name="zhoujixing-vote" options="-parameters" />
+      <module name="zhoujixing-admin" options="" />
+      <module name="zhoujixing-cangku" options="" />
+      <module name="zhoujixing-crm" options="" />
+      <module name="zhoujixing-easyui" options="" />
+      <module name="zhoujixing-pay" options="" />
+      <module name="zhoujixing-restaurant" options="" />
+      <module name="zhoujixing-vote" options="" />
     </option>
   </component>
 </project>
