@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.dao.TakeMapper">
+    <!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        shop_take(user_id,shop_take_consignee,shop_take_province,shop_take_city,shop_take_county,shop_take_street,shop_take_tel,shop_take_postcode,shop_take_create_time)
+        VALUES
+        (#{user_id},#{shop_take_consignee},#{shop_take_province},#{shop_take_city},#{shop_take_county},#{shop_take_street},#{shop_take_tel},#{shop_take_postcode},#{shop_take_create_time})
+    </insert>
+    <!--根据id查询一条信息-->
+    <select id="getById" resultType="com.zhoujixing.entity.TakeModel">
+		SELECT * FROM shop_take WHERE shop_take_id = #{0}
+	</select>
+    <!--查询所有信息-->
+    <select id="selA" parameterType="map" resultType="com.zhoujixing.entity.TakeModel">
+        SELECT * FROM shop_take
+        <where>
+            <if test="user_id != null">
+                AND user_id=#{user_id}
+            </if>
+            <if test="shop_take_consignee != null and shop_take_consignee != ''">
+                AND shop_take_consignee like CONCAT('%', #{shop_take_consignee} ,'%')
+            </if>
+            <if test="shop_take_province != null and shop_take_province != ''">
+                AND shop_take_province like CONCAT('%', #{shop_take_province} ,'%')
+            </if>
+            <if test="shop_take_city != null and shop_take_city != ''">
+                AND shop_take_city like CONCAT('%', #{shop_take_city} ,'%')
+            </if>
+            <if test="shop_take_county != null and shop_take_county != ''">
+                AND shop_take_county like CONCAT('%', #{shop_take_county} ,'%')
+            </if>
+            <if test="shop_take_street != null and shop_take_street != ''">
+                AND shop_take_street like CONCAT('%', #{shop_take_street} ,'%')
+            </if>
+            <if test="shop_take_tel != null and shop_take_tel != ''">
+                AND shop_take_tel like CONCAT('%', #{shop_take_tel} ,'%')
+            </if>
+            <if test="shop_take_postcode != null and shop_take_postcode != ''">
+                AND shop_take_postcode like CONCAT('%', #{shop_take_postcode} ,'%')
+            </if>
+            <if test="shop_take_create_time != null and shop_take_create_time != ''">
+                AND Date(shop_take_create_time) =  Date(#{shop_take_create_time})
+            </if>
+        </where>
+    </select>
+    <!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE shop_take
+        <set>
+            <if test="user_id != null">
+                user_id = #{user_id},
+            </if>
+            <if test="shop_take_consignee != null">
+                shop_take_consignee = #{shop_take_consignee},
+            </if>
+            <if test="shop_take_city != null">
+                shop_take_city = #{shop_take_city},
+            </if>
+            <if test="shop_take_county != null">
+                shop_take_county = #{shop_take_county},
+            </if>
+            <if test="shop_take_street != null">
+                shop_take_street = #{shop_take_street},
+            </if>
+            <if test="shop_take_tel != null">
+                shop_take_tel = #{shop_take_tel},
+            </if>
+            <if test="shop_take_postcode != null">
+                shop_take_postcode = #{shop_take_postcode},
+            </if>
+            <if test="shop_take_create_time != null">
+                shop_take_create_time = #{shop_take_create_time}
+            </if>
+        </set>
+        WHERE shop_take_id = #{shop_take_id}
+    </update>
+    <!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">DELETE FROM shop_take WHERE shop_take_id = #{0}</delete>
+
+</mapper>
+

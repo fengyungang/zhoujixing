@@ -2,11 +2,13 @@ package com.zhoujixing.mapper;
 
 import com.zhoujixing.entity.SysUserEntity;
 import org.apache.ibatis.annotations.Mapper;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Map;
 
 @Mapper
+@Repository
 public interface UserMapper {
     /**
      * 添加用户的方法

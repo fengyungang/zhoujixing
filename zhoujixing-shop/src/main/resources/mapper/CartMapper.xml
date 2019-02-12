@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.dao.CartMapper">
+    <!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        shop_cart(user_id,shop_goods_id,shop_cart_num,shop_cart_state,shop_cart_create_time,shop_cart_update_time)
+        VALUES
+        (#{user_id},#{shop_goods_id},#{shop_cart_num},#{shop_cart_state},#{shop_cart_create_time},#{shop_cart_update_time})
+    </insert>
+    <!--根据id查询一条信息-->
+    <select id="getById" resultType="com.zhoujixing.entity.CartModel">
+		SELECT * FROM shop_cart WHERE shop_cart_id = #{0}
+	</select>
+    <!--查询所有信息-->
+    <select id="selA" parameterType="map" resultType="com.zhoujixing.entity.CartModel">
+        SELECT * FROM shop_cart
+        <where>
+            <if test="user_id != null">
+                AND user_id=#{user_id}
+            </if>
+            <if test="shop_goods_id != null">
+                AND shop_goods_id=#{shop_goods_id}
+            </if>
+            <if test="shop_cart_num != null">
+                AND shop_cart_num=#{shop_cart_num}
+            </if>
+            <if test="shop_cart_state != null and shop_cart_state != ''">
+                AND shop_cart_state like CONCAT('%', #{shop_cart_state} ,'%')
+            </if>
+            <if test="shop_cart_create_time != null and shop_cart_create_time != ''">
+                AND Date(shop_cart_create_time) =  Date(#{shop_cart_create_time})
+            </if>
+            <if test="shop_cart_update_time != null and shop_cart_update_time != ''">
+                AND Date(shop_cart_update_time) =  Date(#{shop_cart_update_time})
+            </if>
+        </where>
+    </select>
+    <!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE shop_cart
+        <set>
+            <if test="user_id != null">
+                user_id = #{user_id},
+            </if>
+            <if test="shop_goods_id != null">
+                shop_goods_id = #{shop_goods_id},
+            </if>
+            <if test="shop_cart_num != null">
+                shop_cart_num = #{shop_cart_num},
+            </if>
+            <if test="shop_cart_state != null">
+                shop_cart_state = #{shop_cart_state},
+            </if>
+            <if test="shop_cart_create_time != null">
+                shop_cart_create_time = #{shop_cart_create_time},
+            </if>
+            <if test="shop_cart_update_time != null">
+                shop_cart_update_time = #{shop_cart_update_time}
+            </if>
+        </set>
+        WHERE shop_cart_id = #{shop_cart_id}
+    </update>
+    <!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">DELETE FROM shop_cart WHERE shop_cart_id = #{0}</delete>
+
+</mapper>
+

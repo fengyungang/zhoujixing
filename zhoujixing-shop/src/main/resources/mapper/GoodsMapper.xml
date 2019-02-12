@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.dao.GoodsMapper">
+    <!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        shop_goods(shop_shops_id,shop_category_id,shop_goods_main_title,shop_goods_sub_title,shop_goods_price,shop_goods_old_price,shop_goods_buy,shop_goods_img,shop_goods_state,shop_goods_del,shop_goods_create_time)
+        VALUES
+        (#{shop_shops_id},#{shop_category_id},#{shop_goods_main_title},#{shop_goods_sub_title},#{shop_goods_price},#{shop_goods_old_price},#{shop_goods_buy},#{shop_goods_img},#{shop_goods_state},#{shop_goods_del},#{shop_goods_create_time})
+    </insert>
+    <!--根据id查询一条信息-->
+    <select id="getById" resultType="com.zhoujixing.entity.GoodsModel">
+		SELECT * FROM shop_goods WHERE shop_goods_id = #{0}
+	</select>
+    <!--查询所有信息-->
+    <select id="selA" parameterType="map" resultType="com.zhoujixing.entity.GoodsModel">
+        SELECT * FROM shop_goods
+        <where>
+            <if test="shop_shops_id != null">
+                AND shop_shops_id=#{shop_shops_id}
+            </if>
+            <if test="shop_category_id != null">
+                AND shop_category_id=#{shop_category_id}
+            </if>
+            <if test="shop_goods_main_title != null and shop_goods_main_title != ''">
+                AND shop_goods_main_title like CONCAT('%', #{shop_goods_main_title} ,'%')
+            </if>
+            <if test="shop_goods_sub_title != null and shop_goods_sub_title != ''">
+                AND shop_goods_sub_title like CONCAT('%', #{shop_goods_sub_title} ,'%')
+            </if>
+            <if test="shop_goods_price != null">
+                AND shop_goods_price = #{shop_goods_price}
+            </if>
+            <if test="shop_goods_old_price != null">
+                AND shop_goods_old_price = #{shop_goods_old_price}
+            </if>
+            <if test="shop_goods_buy != null">
+                AND shop_goods_buy = #{shop_goods_buy}
+            </if>
+            <if test="shop_goods_img != null and shop_goods_img != ''">
+                AND shop_goods_img like CONCAT('%', #{shop_goods_img} ,'%')
+            </if>
+            <if test="shop_goods_state != null and shop_goods_state != ''">
+                AND shop_goods_state like CONCAT('%', #{shop_goods_state} ,'%')
+            </if>
+            <if test="shop_goods_del != null and shop_goods_del != ''">
+                AND shop_goods_del like CONCAT('%', #{shop_goods_del} ,'%')
+            </if>
+            <if test="shop_goods_create_time != null and shop_goods_create_time != ''">
+                AND Date(shop_goods_create_time) =  Date(#{shop_goods_create_time})
+            </if>
+        </where>
+    </select>
+    <!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE shop_goods
+        <set>
+            <if test="shop_shops_id != null">
+                shop_shops_id = #{shop_shops_id},
+            </if>
+            <if test="shop_category_id != null">
+                shop_category_id = #{shop_category_id},
+            </if>
+            <if test="shop_goods_main_title != null">
+                shop_goods_main_title = #{shop_goods_main_title},
+            </if>
+            <if test="shop_goods_sub_title != null">
+                shop_goods_sub_title = #{shop_goods_sub_title},
+            </if>
+            <if test="shop_goods_price != null">
+                shop_goods_price = #{shop_goods_price},
+            </if>
+            <if test="shop_goods_old_price != null">
+                shop_goods_old_price = #{shop_goods_old_price},
+            </if>
+            <if test="shop_goods_buy != null">
+                shop_goods_buy = #{shop_goods_buy},
+            </if>
+            <if test="shop_goods_img != null">
+                shop_goods_img = #{shop_goods_img},
+            </if>
+            <if test="shop_goods_state != null">
+                shop_goods_state = #{shop_goods_state},
+            </if>
+            <if test="shop_goods_del != null">
+                shop_goods_del = #{shop_goods_del},
+            </if>
+            <if test="shop_goods_create_time != null">
+                shop_goods_create_time = #{shop_goods_create_time}
+            </if>
+        </set>
+        WHERE shop_goods_id = #{shop_goods_id}
+    </update>
+    <!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">DELETE FROM shop_goods WHERE shop_goods_id = #{0}</delete>
+
+</mapper>
+
