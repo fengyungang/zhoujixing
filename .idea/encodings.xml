@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
-  <component name="Encoding">
+  <component name="Encoding" defaultCharsetForPropertiesFiles="UTF-8" addBOMForNewFiles="with NO BOM">
     <file url="file://$PROJECT_DIR$" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/zhoujixing-admin" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/zhoujixing-cangku" charset="UTF-8" />
@@ -8,6 +8,6 @@
     <file url="file://$PROJECT_DIR$/zhoujixing-easyui" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/zhoujixing-pay" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/zhoujixing-restaurant" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/zhoujixing-shop" charset="UTF-8" />
+    <file url="PROJECT" charset="UTF-8" />
   </component>
 </project>

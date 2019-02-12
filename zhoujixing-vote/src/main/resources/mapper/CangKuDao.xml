@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.zhoujixing.mapper.VoteMapper">
+   <insert id="insertSheZhi" parameterType="com.zhoujixing.entity.VoteEntity">
+      insert into  xzb(x_ipdz,x_name,x_sj,x_tpr,x_tps) value (#{x_ipdz},#{x_name},#{x_sj},#{x_tpr},#{x_tps})
+      <!--insert into  zhid(z_zdt,z_zdtg,z_ygt) value (#{z_zdt},#{z_zdtg},#{z_ygt})
+      insert into  hdb(h_bt,h_nr,h_kssj,h_jssj,h_bmsj,h_bjssj) value (#{h_bt},#{h_nr},#{h_kssj},#{h_jssj},#{h_bmsj},#{h_bjssj})
+      insert into  pdx(p_name,p_tup,p_jieshao) values (#{p_name},#{p_tup},#{p_jieshao})
+      insert into  tpjl(t_pid,t_hid,t_ps) value (#{t_pid},#{t_hid},#{t_ps})-->
+   </insert>
+   <insert id="insertZhid" parameterType="com.zhoujixing.entity.VoteEntity">
+      insert into  zhid(z_zdt,z_zdtg,z_ygt,z_hid) value (#{z_zdt},#{z_zdtg},#{z_ygt},#{z_hid})
+   </insert>
+   <insert id="insertHdb" parameterType="com.zhoujixing.entity.VoteEntity" useGeneratedKeys="true" keyProperty="h_id">
+      insert into  hdb(h_bt,h_nr,h_kssj,h_jssj,h_bmsj,h_bjssj) value (#{h_bt},#{h_nr},#{h_kssj},#{h_jssj},#{h_bmsj},#{h_bjssj})
+   </insert>
+   <insert id="insertPdx" useGeneratedKeys="true" keyProperty="p_id" parameterType="com.zhoujixing.entity.VoteEntity">
+     insert into  pdx(p_name,p_tup,p_jieshao) values (#{p_name},#{p_tup},#{p_jieshao})
+   </insert>
+   <insert id="insertTpjl" parameterType="com.zhoujixing.entity.VoteEntity">
+      insert into  tpjl(t_pid,t_hid,t_ps) value (#{t_pid},#{t_hid},#{t_ps})
+   </insert>
+
+   <select id="selecthdb" resultType="com.zhoujixing.entity.VoteEntity">
+      select * from hdb where h_bt=#{h_bt}
+   </select>
+   
+   <select id="selectPdx" resultType="com.zhoujixing.entity.VoteEntity">
+      select * from pdx where p_name=#{p_name};
+   </select>
+
+   <update id="updatetup">
+      update pdx set p_tup=#{p_tup} where p_id=#{p_id}
+   </update>
+
+   <update id="xiubeitour">
+      update pdx set
+      <if test="p_name!=null">p_name=#{p_name}</if>,
+      <if test="p_jieshao!=null">p_jieshao=#{p_jieshao}</if>
+      where  p_id=#{p_id}
+   </update>
+
+   <select id="selectbeitou" resultType="com.zhoujixing.entity.VoteEntity">
+      select * from pdx
+   </select>
+
+   <delete id="deletebeitour">
+      delete from  pdx
+         where
+        p_id=#{p_id}
+   </delete>
+
+   <select id="selectbtchatpjl" resultType="com.zhoujixing.entity.VoteEntity">
+      select * from tpjl where t_hid=#{p_id}
+   </select>
+
+   <select id="selecttpjlpdx" resultType="com.zhoujixing.entity.VoteEntity">
+      select * from pdx where p_id=#{t_pid};
+   </select>
+
+   <select id="chaxuntoup" resultType="com.zhoujixing.entity.VoteEntity">
+      select * from xzb where  x_tpr=#{x_name}
+   </select>
+
+   <update id="xiugaitoup">
+
+      update xzb set x_tps=#{x_tps} where x_id=#{x_id}
+   </update>
+
+   <select id="zhidselect" resultType="com.zhoujixing.entity.VoteEntity">
+      select * from zhid where z_hid=#{z_hid}
+   </select>
+</mapper>
+

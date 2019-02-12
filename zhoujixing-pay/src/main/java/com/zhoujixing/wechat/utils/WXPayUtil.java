@@ -1,6 +1,5 @@
 package com.zhoujixing.wechat.utils;
 
-import org.jetbrains.annotations.NotNull;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 
@@ -19,7 +18,8 @@ import java.util.*;
 /**
  * 微信支付工具类，xml转map,map转xml，生成签名
  */
-public class WXPayUtil {
+public class
+WXPayUtil {
 
     /**
      * XML格式字符串转换为Map

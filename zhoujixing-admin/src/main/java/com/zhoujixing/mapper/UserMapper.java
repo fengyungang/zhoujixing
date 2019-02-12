@@ -57,4 +57,24 @@ public interface UserMapper {
      * @return
      */
     List<SysUserEntity> getPageUser(Map<String,Object> data);
+
+    /**
+     * 修改密码的方法
+     * @param userEntity
+     * @return
+     */
+    int updatepassword(SysUserEntity userEntity);
+
+    /**
+     * 返回总条数
+     * @return
+     */
+    int usercount();
+
+    /**
+     * 用户更新的方法
+     * @param userEntity
+     * @return
+     */
+    int userUpdate(SysUserEntity userEntity);
 }

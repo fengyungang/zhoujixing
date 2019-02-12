@@ -1,14 +1,17 @@
 package com.zhoujixing.controller;
 
 import com.zhoujixing.entity.SysMenuEntity;
+import com.zhoujixing.entity.SysUserEntity;
 import com.zhoujixing.service.SysMenuRoleService;
 import com.zhoujixing.service.SysMeunService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -49,6 +52,14 @@ public class MenuController {
     @ApiOperation(value = "获得所有菜单的方法")
     public List<SysMenuEntity> getMenuList(){
         return sysMeunService.getMenuList();
+    }
+
+    @RequestMapping("/geUserMenuList")
+    @ResponseBody
+    public List<SysMenuEntity> getUserMenuList(HttpServletRequest request){
+        SysUserEntity sysUserEntity= (SysUserEntity) request.getSession().getAttribute("user");
+        List<SysMenuEntity> list = sysMeunService.getUserMenuList(sysUserEntity.getRoleid());
+        return list;
     }
 
     @RequestMapping("/delMenu")

@@ -18,4 +18,10 @@ public class CallLogModel {
     private Date call_log_create_time;//创建时间
     private Date call_log_contact_time;//联系时间
 
+    public void setCall_log_contact_time(Date call_log_contact_time) {
+        this.call_log_contact_time = call_log_contact_time;
+    }
+
+    public void setCall_log_create_time(Date date) {
+    }
 }

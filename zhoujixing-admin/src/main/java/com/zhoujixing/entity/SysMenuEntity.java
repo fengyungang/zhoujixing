@@ -3,6 +3,7 @@ package com.zhoujixing.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * 功能菜单表
@@ -66,6 +67,11 @@ public class SysMenuEntity implements Serializable {
 	 * 0：菜单；1：按钮
 	 */
 	private Integer menutype;
+
+	/**
+	 * 查询子菜单的集合
+	 */
+	private List<?> list;
 
 	/**
 	 * 设置：自增主键
@@ -222,5 +228,13 @@ public class SysMenuEntity implements Serializable {
 	 */
 	public Integer getMenutype() {
 		return menutype;
+	}
+
+	public List<?> getList() {
+		return list;
+	}
+
+	public void setList(List<?> list) {
+		this.list = list;
 	}
 }

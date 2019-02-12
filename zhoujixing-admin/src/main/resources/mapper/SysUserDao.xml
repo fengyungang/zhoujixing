@@ -24,6 +24,10 @@
         <result property="state" column="state"/>
     </resultMap>
 
+    <resultMap id="ResultOfInteger" type="java.lang.Integer">
+        <result column="id" property="id" jdbcType="INTEGER" />
+    </resultMap>
+
     <sql id="tablesql">
         roleid,loginname,loginpass,realname,createtime,sex,province,city,area,companyid,email,logincount,lastloginip,lastlogintime,lastloginaddr,remark,state
     </sql>
@@ -53,9 +57,72 @@
     <select id="findByUserName" parameterType="java.lang.String" resultType="com.zhoujixing.entity.SysUserEntity">
       select id,roleid,loginname,loginpass,realname,createtime,sex,province,city,area,companyid,email,logincount,lastloginip,lastlogintime,lastloginaddr,remark,state from sys_user where loginname = #{username}
     </select>
+    <select id="usercount" resultType="int">
+        select count(*) from sys_user
+    </select>
+    <update id="userUpdate">
+        update syst_user
+        <set>
+            <if test="roleid != null">
+                roleid = #{roleid}
+            </if>
+            <if test="loginname !=null and loginname !=''">
+                loginname = #{loginname}
+            </if>
+            <if test="loginpass != null and loginpass != ''">
+                loginpass = #{loginpass}
+            </if>
+            <if test="realname !=null and realname  != ''">
+                realname = #{realname}
+            </if>
+            <if test="createtime != null and  createtime != ''">
+                createtime  =#{createtime}
+            </if>
+            <if test="sex !=null  and sex !=''">
+                sex = #{sex}
+            </if>
+            <if test="province !=null and province !=''">
+                province =#{province}
+            </if>
+            <if test="city != null and city != ''">
+                city =  #{city}
+            </if>
+            <if test="area !=null and area != ''">
+                area = #{area}
+            </if>
+            <if test="companyid !=null and companyid !=''">
+                companyid  = #{companyid}
+            </if>
+            <if test="email !=null and email !=''">
+                email = #{email}
+            </if>
+            <if test="lastloginip !=null and lastloginip !=''">
+                lastloginip = #{lastloginip}
+            </if>
+            <if test="lastlogintime !=null and lastlogintime !=''">
+                lastlogintime = #{lastlogintime}
+            </if>
+            <if test="lastloginaddr !=null and lastloginaddr !=''">
+                lastloginaddr = #{lastloginaddr}
+            </if>
+            <if test="logincount !=null and logincount !=''">
+                logincount = #{logincount}
+            </if>
+            <if test="remark !=null and remark !=''">
+                remark = #{remark}
+            </if>
+            <if test="state !=null and state !=''">
+                state = #{state}
+            </if>
+        </set>
+        where id= #{id}
+    </update>
     <select id="findByUser" parameterType="com.zhoujixing.entity.SysUserEntity" resultMap="sysUserMap">
         select id,roleid,loginname,loginpass,realname,createtime,sex,province,city,area,companyid,email,logincount,lastloginip,lastlogintime,lastloginaddr,remark,state from sys_user
         <where>
+            <if test="loginpass !=null and loginpass !=''">
+                and loginpass = #{loginpass}
+            </if>
             <if test="loginname!=null and loginname!=''">
                 and loginname like CONCAT('%',#{loginname},'%')
             </if>
@@ -92,4 +159,9 @@
     <update id="updateIP" parameterType="com.zhoujixing.entity.SysUserEntity">
       update sys_user set lastloginip = #{lastloginip} where id =#{id}
     </update>
+    <update id="updatepassword" parameterType="com.zhoujixing.entity.SysUserEntity">
+      update sys_user set loginpass = #{loginpass} where id =#{id}
+    </update>
+
+
 </mapper>
