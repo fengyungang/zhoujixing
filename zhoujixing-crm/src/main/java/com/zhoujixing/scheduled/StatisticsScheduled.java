@@ -18,6 +18,7 @@ public class StatisticsScheduled {
     @Autowired
     private TimeStatisticsLogic timeStatisticsLogic;
 
+
     /**
      * 每天1点定时统计数据
      */

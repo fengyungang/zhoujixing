@@ -12,10 +12,10 @@
     <module>zhoujixing-admin</module>
     <module>zhoujixing-easyui</module>
     <module>zhoujixing-crm</module>
-      <module>zhoujixing-cangku</module>
-      <module>zhoujixing-restaurant</module>
-      <module>zhoujixing-pay</module>
-
+    <module>zhoujixing-cangku</module>
+    <module>zhoujixing-restaurant</module>
+    <module>zhoujixing-pay</module>
+    <module>zhoujixing-shop</module>
   </modules>
 
   <name>zhoujixing</name>
