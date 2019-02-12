@@ -7,6 +7,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="zhoujixing-admin" />
+        <module name="zhoujixing-award" />
         <module name="zhoujixing-cangku" />
         <module name="zhoujixing-crm" />
         <module name="zhoujixing-easyui" />
@@ -18,6 +19,7 @@
     <bytecodeTargetLevel>
       <module name="zhoujixing" target="1.8" />
       <module name="zhoujixing-admin" target="8" />
+      <module name="zhoujixing-award" target="1.7" />
       <module name="zhoujixing-cangku" target="1.7" />
       <module name="zhoujixing-crm" target="1.7" />
       <module name="zhoujixing-easyui" target="1.7" />
@@ -29,6 +31,7 @@
   <component name="JavacSettings">
     <option name="ADDITIONAL_OPTIONS_OVERRIDE">
       <module name="zhoujixing-admin" options="-parameters" />
+      <module name="zhoujixing-award" options="-parameters" />
       <module name="zhoujixing-cangku" options="-parameters" />
       <module name="zhoujixing-crm" options="-parameters" />
       <module name="zhoujixing-easyui" options="-parameters" />
