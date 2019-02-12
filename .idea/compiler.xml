@@ -7,21 +7,27 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <module name="zhoujixing-admin" />
+        <module name="zhoujixing-award" />
         <module name="zhoujixing-cangku" />
         <module name="zhoujixing-crm" />
         <module name="zhoujixing-easyui" />
         <module name="zhoujixing-pay" />
         <module name="zhoujixing-restaurant" />
+        <module name="zhoujixing-shop" />
+        <module name="zhoujixing-vote" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="zhoujixing" target="1.8" />
       <module name="zhoujixing-admin" target="8" />
+      <module name="zhoujixing-award" target="1.7" />
       <module name="zhoujixing-cangku" target="1.7" />
       <module name="zhoujixing-crm" target="1.7" />
       <module name="zhoujixing-easyui" target="1.7" />
       <module name="zhoujixing-pay" target="1.7" />
-      <module name="zhoujixing-restaurant" target="1.7" />
+      <module name="zhoujixing-restaurant" target="1.8" />
+      <module name="zhoujixing-shop" target="1.7" />
+      <module name="zhoujixing-vote" target="1.7" />
     </bytecodeTargetLevel>
   </component>
   <component name="JavacSettings">
