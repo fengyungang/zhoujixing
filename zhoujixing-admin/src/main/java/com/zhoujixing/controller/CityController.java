@@ -32,6 +32,13 @@ public class CityController {
         return list;
     }
 
+    @RequestMapping("/getAllCityList")
+    @ResponseBody
+    public List<SysCityEntity> getAllCityList (){
+        return sysCityService.getAllCityList();
+    }
+
+
     /**
      * 用来判断是微信扫码还是支付宝扫码
      * @param request

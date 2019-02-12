@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:include="header.html">
+    <title>角色表</title>
+		<#include "/header.html">
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;新增</a>
+            <a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;修改</a>
+            <a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;删除</a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-default">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+														                    <div class="form-group">
+                        <div class="col-sm-2 control-label">角色名称</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="sysRole.name" placeholder="角色名称"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">角色描述</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="sysRole.discription" placeholder="角色描述"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">角色状态(0：无效；1：有效)</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="sysRole.state" placeholder="角色状态(0：无效；1：有效)"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">是否超级管理员</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="sysRole.rootflag" placeholder="是否超级管理员"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">创建人ID</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="sysRole.creatorid" placeholder="创建人ID"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">创建时间</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="sysRole.createtime" placeholder="创建时间"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">角色权限</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="sysRole.options" placeholder="角色权限"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">所属站点</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="sysRole.fromsite" placeholder="所属站点"/>
+                        </div>
+                    </div>
+											                    <div class="form-group">
+                        <div class="col-sm-2 control-label">所属平台</div>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control" v-model="sysRole.platform" placeholder="所属平台"/>
+                        </div>
+                    </div>
+							            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="确定"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="返回"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="/zhoujixing/static/js/admin/sysrole.js"></script>
+</body>
+</html>

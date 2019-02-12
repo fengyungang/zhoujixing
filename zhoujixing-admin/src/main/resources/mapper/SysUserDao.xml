@@ -46,6 +46,10 @@
         select id,roleid,loginname,loginpass,realname,createtime,sex,province,city,area,companyid,email,logincount,lastloginip,lastlogintime,lastloginaddr,remark,state from sys_user
     </select>
 
+    <select id="getbyId" resultMap="sysUserMap" parameterType="java.lang.String">
+        select * from sys_user where id = #{id}
+    </select>
+
     <select id="getPageUser" resultMap="sysUserMap" parameterType="map">
         select id,roleid,loginname,loginpass,realname,createtime,sex,province,city,area,companyid,email,logincount,lastloginip,lastlogintime,lastloginaddr,remark,state from sys_user limit #{currIndex},#{pageSize}
     </select>
@@ -60,59 +64,59 @@
     <select id="usercount" resultType="int">
         select count(*) from sys_user
     </select>
-    <update id="userUpdate">
-        update syst_user
+    <update id="userUpdate" parameterType="com.zhoujixing.entity.SysUserEntity">
+        update sys_user
         <set>
             <if test="roleid != null">
-                roleid = #{roleid}
+                roleid = #{roleid},
             </if>
             <if test="loginname !=null and loginname !=''">
-                loginname = #{loginname}
+                loginname = #{loginname},
             </if>
             <if test="loginpass != null and loginpass != ''">
-                loginpass = #{loginpass}
+                loginpass = #{loginpass},
             </if>
             <if test="realname !=null and realname  != ''">
-                realname = #{realname}
+                realname = #{realname},
             </if>
-            <if test="createtime != null and  createtime != ''">
-                createtime  =#{createtime}
+            <if test="createtime != null">
+                createtime  =#{createtime},
             </if>
             <if test="sex !=null  and sex !=''">
-                sex = #{sex}
+                sex = #{sex},
             </if>
             <if test="province !=null and province !=''">
-                province =#{province}
+                province =#{province},
             </if>
             <if test="city != null and city != ''">
-                city =  #{city}
+                city =  #{city},
             </if>
             <if test="area !=null and area != ''">
-                area = #{area}
+                area = #{area},
             </if>
             <if test="companyid !=null and companyid !=''">
-                companyid  = #{companyid}
+                companyid  = #{companyid},
             </if>
             <if test="email !=null and email !=''">
-                email = #{email}
+                email = #{email},
             </if>
             <if test="lastloginip !=null and lastloginip !=''">
-                lastloginip = #{lastloginip}
+                lastloginip = #{lastloginip},
             </if>
-            <if test="lastlogintime !=null and lastlogintime !=''">
-                lastlogintime = #{lastlogintime}
+            <if test="lastlogintime !=null">
+                lastlogintime = #{lastlogintime},
             </if>
             <if test="lastloginaddr !=null and lastloginaddr !=''">
-                lastloginaddr = #{lastloginaddr}
+                lastloginaddr = #{lastloginaddr},
             </if>
             <if test="logincount !=null and logincount !=''">
-                logincount = #{logincount}
+                logincount = #{logincount},
             </if>
             <if test="remark !=null and remark !=''">
-                remark = #{remark}
+                remark = #{remark},
             </if>
             <if test="state !=null and state !=''">
-                state = #{state}
+                state = #{state},
             </if>
         </set>
         where id= #{id}
@@ -132,7 +136,7 @@
             <if test="sex !=null and sex != ''">
                 and sex = #{sex}
             </if>
-            <if test="createtime != nul and createtime = ''">
+            <if test="createtime != nul">
                 and createtime = #{createtime}
             </if>
             <if test="province != null and province != ''">

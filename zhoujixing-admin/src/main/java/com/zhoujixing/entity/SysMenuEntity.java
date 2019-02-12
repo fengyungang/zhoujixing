@@ -106,7 +106,7 @@ public class SysMenuEntity implements Serializable {
 	/**
 	 * 获取：菜单名称
 	 */
-	public String getMenunamename() {
+	public String getMenuname() {
 		return menuname;
 	}
 	/**

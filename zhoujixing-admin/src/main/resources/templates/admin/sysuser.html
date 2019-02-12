@@ -110,6 +110,12 @@
         </form>
     </div>
 </div>
+<div type="hidden" th:each="city,cityStat:${citylist}">
+    <input type="hidden" th:value="${city.getName()}" th:id="${city.getId()}">
+</div>
+<div th:each="role ,roleStat:${roleList}">
+    <input type="hidden" th:value="${role.getName()}" th:id="${role.getId()}">
+</div>
 <script src="/zhoujixing/static/js/admin/sysuser.js"></script>
 </body>
 </html>

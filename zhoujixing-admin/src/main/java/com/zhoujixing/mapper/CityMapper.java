@@ -21,4 +21,9 @@ public interface CityMapper {
      */
     List<SysCityEntity> getCity(String parentId);
 
+    /**
+     * 返回所有城市的集合
+     * @return
+     */
+    List<SysCityEntity> getAllCityList();
 }

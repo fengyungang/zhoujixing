@@ -4,6 +4,7 @@ import com.zhoujixing.entity.SysRoleEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface RoleMapper {
@@ -33,5 +34,32 @@ public interface RoleMapper {
      * @return
      */
     List<SysRoleEntity> getList(SysRoleEntity sysRoleEntity);
+
+    /**
+     * 角色分页的方法
+     * @param data
+     * @return
+     */
+    List<SysRoleEntity> getPageList(Map<String,Object> data);
+
+    /**
+     * 返回总条数
+     * @return
+     */
+    int rolecount();
+
+    /**
+     * 根据编号获取编号
+     * @param id
+     * @return
+     */
+    SysRoleEntity getbyid(String id);
+
+    /**
+     * 角色更新的方法
+     * @param sysRoleEntity
+     * @return
+     */
+    int roleupdate(SysRoleEntity sysRoleEntity);
 
 }

@@ -27,6 +27,49 @@
         id,parentid,menuname,ordernum,url,icon,attributes,actions,platform,createtime,creatorid,state,menutype
     </sql>
 
+    <update id="updatemenu" parameterType="com.zhoujixing.entity.SysMenuEntity">
+        update sys_menu
+        <set>
+            <if test="parentid !=null">
+                parentid = #{parentid},
+            </if>
+            <if test="menuname !=null and menuname != ''">
+                menuname = #{menuname},
+            </if>
+            <if test="ordernum != null">
+                ordernum = #{ordernum},
+            </if>
+            <if test="url != null and url !=''">
+                url = #{url},
+            </if>
+            <if test="icon != null and icon != ''">
+                icon = #{icon},
+            </if>
+            <if test="attributes != null and attributes != ''">
+                attributes = #{attributes},
+            </if>
+            <if test="actions != null and actions != ''">
+                actions = #{actions},
+            </if>
+            <if test="platform != null and platform != ''">
+                platform = #{platform},
+            </if>
+            <if test="createtime != null">
+                createtime = #{createtime},
+            </if>
+            <if test="creatorid != null and creatorid !=''">
+                creatorid = #{creatorid},
+            </if>
+            <if test="state != null and state != ''">
+                state =  #{state},
+            </if>
+            <if test="menutype !=null and menutype !=''">
+                menutype = #{menutype}
+            </if>
+        </set>
+        where id=#{id}
+    </update>
+
     <sql id="insertEntitySql">
         (#{parentid},#{menuname},#{ordernum},#{url},#{icon},#{attributes},#{actions},#{platform},#{createtime},#{creatorid},#{state},#{menutype})
     </sql>
@@ -40,8 +83,8 @@
         insert into sys_menu <include refid="insertTableSql"/> value <include refid="insertEntitySql"/>;
     </insert>
 
-    <select id="byId" resultType="long">
-        select <include refid="insertTableSql"/> from sys_menu where id = #{id}
+    <select id="byId" parameterType="java.lang.Long" resultMap="sysMenuMap">
+        select * from sys_menu where id = #{id}
     </select>
 
     <select id="byUserIdListMen" parameterType="java.lang.Long" resultMap="sysMenuMap">
@@ -55,8 +98,8 @@
       select * from sys_menu where parentId = #{parentId} order by orderNum asc
     </select>
 
-    <select id="getMenuList" resultMap="sysMenuMap" parameterType="com.zhoujixing.entity.SysMenuEntity">
-        select <include refid="selectTableSql"/> from sys_menu
+    <select id="getMenuList" resultMap="sysMenuMap" parameterType="map">
+        select <include refid="selectTableSql"/> from sys_menu limit #{currIndex},#{pageSize}
         <where>
           <if test="menuname != null and menuname !=''">
               and menuname like CONCAT('%',#{menuname},'%')
@@ -82,5 +125,9 @@
     <delete id="delMenu" parameterType="java.lang.String">
         delete  from  sys_menu where id = #{id}
     </delete>
+
+    <select id="menucount" resultType="int">
+        select count(*) from sys_menu
+    </select>
 
 </mapper>

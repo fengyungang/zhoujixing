@@ -3,10 +3,11 @@ $(function () {
 		url: 'getUserList',
 		datatype: "json",
 		colModel: [
-			{ label: 'id', name: 'id', index: 'id', width: 50, key: true },
-			{ label: '角色ID', name: 'roleid', index: 'roleId', width: 80 },
+			{ label: '编号', name: 'id', index: 'id', width: 50, key: true },
+			{ label: '角色', name: 'roleid', index: 'roleId', width: 80 ,formatter:function (cellvalue, options, rowObject) {
+					return $("#"+cellvalue).val();
+				}},
 			{ label: '用户账号', name: 'loginname', index: 'loginName', width: 80 },
-			{ label: '用户密码', name: 'loginpass', index: 'loginPass', width: 80 },
 			{ label: '真实姓名', name: 'realname', index: 'realName', width: 80 },
 			{ label: '创建时间', name: 'createtime', index: 'createTime', width: 80 },
 			{ label: '性别', name: 'sex', index: 'sex', width: 80 , formatter:function (cellvalue, options, rowObject) {
@@ -20,9 +21,18 @@ $(function () {
 						return "保密"
 					}
 				}},
-			{ label: '所属省份', name: 'province', index: 'province', width: 80 },
-			{ label: '所属城市', name: 'city', index: 'city', width: 80 },
-			{ label: '所属区县', name: 'area', index: 'area', width: 80 },
+			{ label: '所属省份', name: 'province', index: 'province', width: 80 ,formatter: function (cellvalue, options, rowObject) {
+					console.log($("#"+cellvalue).val());
+					return $("#"+cellvalue).val();
+			}},
+			{ label: '所属城市', name: 'city', index: 'city', width: 80 ,formatter: function (cellvalue, options, rowObject) {
+					console.log($("#"+cellvalue).val());
+					return $("#"+cellvalue).val();
+				}},
+			{ label: '所属区县', name: 'area', index: 'area', width: 80 ,formatter: function (cellvalue, options, rowObject) {
+					console.log($("#"+cellvalue).val());
+					return $("#"+cellvalue).val();
+				}},
 			{ label: '所属企业', name: 'companyid', index: 'companyId', width: 80 },
 			{ label: '电子邮箱', name: 'email', index: 'email', width: 80 },
 			{ label: '登录次数', name: 'logincount', index: 'loginCount', width: 80 },
@@ -70,8 +80,8 @@ $(function () {
 			$("#jqGrid").closest(".ui-jqgrid-bdiv").css({ "overflow-x" : "hidden" });
 		}
 	});
-});
 
+});
 var vm = new Vue({
 	el:'#rrapp',
 	data:{
@@ -135,9 +145,14 @@ var vm = new Vue({
 		},
 		saveOrUpdate: function (event) {
 			var url = vm.sysUser.id == null ? "addUser" : "userupdate";
-			console.log("省"+JSON.stringify(vm.sysUser));
+			//console.log("省"+JSON.stringify(vm.sysUser));
 			$.post(url,{user:JSON.stringify(vm.sysUser)},function (data) {
-				alert("1111");
+				if(data.code==200){
+					alert("成功");
+					parent.location.href='sysuser';
+				}else {
+					alert("失败")
+				}
 			});
 		},
 		del: function (event) {
@@ -159,8 +174,8 @@ var vm = new Vue({
 			});
 		},
 		getInfo: function(id){
-			$.get(baseURL + "sys/sysuser/info/"+id, function(r){
-				vm.sysUser = r.sysUser;
+			$.get( "getbyId?id="+id, function(r){
+				vm.sysUser = r;
 			});
 		},
 		reload: function (event) {

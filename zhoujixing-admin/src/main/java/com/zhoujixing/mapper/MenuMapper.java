@@ -4,6 +4,7 @@ import com.zhoujixing.entity.SysMenuEntity;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
+import java.util.Map;
 
 @Mapper
 public interface MenuMapper {
@@ -19,7 +20,7 @@ public interface MenuMapper {
      * @param id
      * @return
      */
-    SysMenuEntity byId(int id);
+    SysMenuEntity byId(long id);
 
     /**
      * 保存并更新 (数据库里没有的插入，数据库里有的更新)
@@ -37,10 +38,10 @@ public interface MenuMapper {
 
     List<SysMenuEntity> byUserIdListMen(long userid);
     /**
-     * 获得所有菜单的方法
+     * 获得所有菜单分页的方法
      * @return
      */
-    List<SysMenuEntity> getMenuList();
+    List<SysMenuEntity> getMenuList(Map<String,Object> data);
 
     /**
      * 删除菜单的方法
@@ -55,4 +56,17 @@ public interface MenuMapper {
      * @return
      */
     List<SysMenuEntity> getistParentId(Long parentId);
+
+    /**
+     * 获得菜单的总条数
+     * @return
+     */
+    int menucount();
+
+    /**
+     * 菜单更新的方法
+     * @param sysMenuEntity
+     * @return
+     */
+    int updatemenu(SysMenuEntity sysMenuEntity);
 }

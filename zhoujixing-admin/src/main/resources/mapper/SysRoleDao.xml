@@ -23,9 +23,55 @@
         value (#{name},#{discription},#{state},#{rootflag},#{creatorid},#{createtime},#{options},#{fromsite},#{platform})
     </insert>
 
+    <update id="roleupdate" parameterType="com.zhoujixing.entity.SysRoleEntity">
+        update sys_role
+        <set>
+          <if test="name != null and name!=''">
+              name = #{name},
+          </if>
+          <if test="discription != null and discription != ''">
+              discription = #{discription},
+          </if>
+          <if test="state != null and state !=''">
+              state = #{state},
+          </if>
+          <if test="rootflag != null and rootflag !=''">
+              rootflag = #{rootflag},
+          </if>
+          <if test="creatorid !=null and creatorid !=''">
+              creatorid = #{creatorid},
+          </if>
+          <if test="createtime !=null">
+              createtime = #{createtime,jdbcType=TIMESTAMP},
+          </if>
+          <if test="options !=null and options !=''">
+              options = #{options},
+          </if>
+          <if test="fromsite !=null and fromsite !=''">
+              fromsite = #{fromsite},
+          </if>
+          <if test="platform !=null and platform !=''">
+              platform = #{platform}
+          </if>
+        </set>
+        where id= #{id}
+    </update>
+
     <delete id="delete" parameterType="java.lang.String">
       delete from sys_role where id= #{id}
     </delete>
+
+    <select id="getbyid" resultMap="sysRoleMap" parameterType="java.lang.String">
+        select * from sys_role where id = #{id}
+    </select>
+
+    <select id="getPageList" resultMap="sysRoleMap" parameterType="map">
+        select * from sys_role limit #{currIndex},#{pageSize}
+    </select>
+
+    <select id="rolecount" resultType="int">
+        select count(*) from sys_role
+    </select>
 
 
     <select id="getList" resultMap="sysRoleMap" parameterType="com.zhoujixing.entity.SysRoleEntity">

@@ -25,4 +25,9 @@ public class SysCityServiceImpl implements SysCityService {
     public List<SysCityEntity> SysCityEntity(String parentId) {
         return cityMapper.getCity(parentId);
     }
+
+    @Override
+    public List<SysCityEntity> getAllCityList() {
+        return cityMapper.getAllCityList();
+    }
 }

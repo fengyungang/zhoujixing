@@ -75,4 +75,11 @@ public interface UserMapper {
      * @return
      */
     int userUpdate(SysUserEntity userEntity);
+
+    /**
+     * 根据编号获得对象
+     * @param id
+     * @return
+     */
+    SysUserEntity getbyId(String id);
 }

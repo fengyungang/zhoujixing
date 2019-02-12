@@ -83,4 +83,11 @@ public interface SysUserService {
      * @return
      */
     int userUpdate(SysUserEntity userEntity);
+
+    /**
+     * 根据编号获取用户信息
+     * @param id
+     * @return
+     */
+    SysUserEntity getbyId(String id);
 }

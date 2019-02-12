@@ -18,4 +18,10 @@ public interface SysCityService {
      * @return
      */
     List<SysCityEntity> SysCityEntity(String parentId);
+
+    /**
+     * 获得所有城市的列表
+     * @return
+     */
+    List<SysCityEntity> getAllCityList();
 }

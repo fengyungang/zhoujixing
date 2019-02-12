@@ -17,15 +17,15 @@ var menuItem = Vue.extend({
         '<li class="layui-nav-item" >',
         '<a v-if="item.menutype === 2" href="javascript:;">',
 
-        '<span>{{item.menunamename}}</span>',
+        '<span>{{item.menuname}}</span>',
         '<em class="layui-nav-more"></em>',
         '</a>',
         '<dl v-if="item.menutype === 2" class="layui-nav-child">',
         '<dd v-for="item in item.list" >',
-        '<a v-if="item.menutype === 0" href="javascript:;" :data-url="item.url"><i v-if="item.icon != null" :class="item.icon" :data-icon="item.icon"></i> <span>{{item.menunamename}}</span></a>',
+        '<a v-if="item.menutype === 0" href="javascript:;" :data-url="item.url"><i v-if="item.icon != null" :class="item.icon" :data-icon="item.icon"></i> <span>{{item.menuname}}</span></a>',
         '</dd>',
         '</dl>',
-        '<a v-if="item.menutype === 0" href="javascript:;" :data-url="item.url"><i v-if="item.icon != null" :class="item.icon" :data-icon="item.icon"></i> <span>{{item.menunamename}}</span></a>',
+        '<a v-if="item.menutype === 0" href="javascript:;" :data-url="item.url"><i v-if="item.icon != null" :class="item.icon" :data-icon="item.icon"></i> <span>{{item.menuname}}</span></a>',
         '</li>'
     ].join('')
 });

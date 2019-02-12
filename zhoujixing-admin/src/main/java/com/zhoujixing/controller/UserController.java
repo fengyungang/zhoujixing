@@ -2,7 +2,9 @@ package com.zhoujixing.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.zhoujixing.config.KaptchaConfig;
+import com.zhoujixing.entity.SysCityEntity;
 import com.zhoujixing.entity.SysMenuEntity;
+import com.zhoujixing.service.SysCityService;
 import com.zhoujixing.service.SysUserService;
 import com.zhoujixing.entity.SysUserEntity;
 
@@ -26,6 +28,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -36,7 +39,7 @@ public class UserController {
     @Autowired
     private SysUserService userService;
     @Autowired
-    private KaptchaConfig kaptchaConfig;
+    private SysCityService sysCityService;
 
 
 
@@ -104,7 +107,14 @@ public class UserController {
 
     @RequestMapping("/userupdate")
     @ResponseBody
-    public ResponseBean  userUpdate(@RequestParam SysUserEntity userEntity){
+    public ResponseBean  userUpdate(@RequestParam String user,HttpServletRequest request){
+        ObjectMapper mapper = new ObjectMapper();
+        SysUserEntity userEntity = null;
+        try {
+            userEntity= mapper.readValue(user,SysUserEntity.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         int a = userService.userUpdate(userEntity);
         if (a>0){
             return new ResponseBean(200,"更新成功",null);
@@ -113,12 +123,19 @@ public class UserController {
         }
     }
 
+    @RequestMapping("/getbyId")
+    @ResponseBody
+    public SysUserEntity getbyId(@RequestParam String id){
+        SysUserEntity user = userService.getbyId(id);
+        return user;
+    }
+
+
     @RequestMapping("/getUserList")
     @ResponseBody
     public PageUtils getUserList(@RequestParam Map<String,Object> params){
         String page = (String) params.get("page");
         String rows = (String) params.get("limit");
-        System.out.println(params);
         List<SysUserEntity> userEntities =userService.getPageUser(Integer.parseInt(page),Integer.parseInt(rows));
         int count = userService.count();
         PageUtils pageUtils =new PageUtils(userEntities,count,Integer.parseInt(rows),Integer.parseInt(page));
@@ -181,6 +198,5 @@ public class UserController {
         }else {
             return "原密码不正确";
         }
-
     }
 }

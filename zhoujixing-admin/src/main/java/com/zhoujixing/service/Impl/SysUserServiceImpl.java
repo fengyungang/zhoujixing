@@ -83,4 +83,9 @@ public class SysUserServiceImpl implements SysUserService {
     public int userUpdate(SysUserEntity userEntity) {
         return userMapper.userUpdate(userEntity);
     }
+
+    @Override
+    public SysUserEntity getbyId(String id) {
+        return userMapper.getbyId(id);
+    }
 }

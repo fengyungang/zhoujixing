@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 public class SysMeunServiceImpl implements SysMeunService {
@@ -20,8 +22,11 @@ public class SysMeunServiceImpl implements SysMeunService {
     }
 
     @Override
-    public List<SysMenuEntity> getMenuList() {
-        return sysMenuMapper.getMenuList();
+    public List<SysMenuEntity> getMenuList(int rows,int page) {
+        Map<String,Object> data = new HashMap<String, Object>();
+        data.put("currIndex",(page-1)*rows);
+        data.put("pageSize",rows);
+        return sysMenuMapper.getMenuList(data);
     }
 
     @Override
@@ -38,6 +43,21 @@ public class SysMeunServiceImpl implements SysMeunService {
 
         List<Long> menuIdList = sysMenuMapper.UserIdListMen(roleid);
         return getAllMenuList(menuIdList);
+    }
+
+    @Override
+    public int menucount() {
+        return sysMenuMapper.menucount();
+    }
+
+    @Override
+    public SysMenuEntity byId(String id) {
+        return sysMenuMapper.byId(Long.parseLong(id));
+    }
+
+    @Override
+    public int updatemenu(SysMenuEntity sysMenuEntity) {
+        return sysMenuMapper.updatemenu(sysMenuEntity);
     }
 
     /***

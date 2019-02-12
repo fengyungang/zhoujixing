@@ -26,4 +26,8 @@
         select * from sys_city where parentId = #{parentId}
     </select>
 
+    <select id="getAllCityList" resultMap="sysCityMap">
+        select * from sys_city
+    </select>
+
 </mapper>
