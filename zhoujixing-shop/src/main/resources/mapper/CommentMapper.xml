@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.dao.CommentMapper">
+    <!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        shop_comment(user_id,shop_goods_id,shop_comment_content,shop_comment_create_time)
+        VALUES
+        (#{user_id},#{shop_goods_id},#{shop_comment_content},#{shop_comment_create_time})
+    </insert>
+    <!--根据id查询一条信息-->
+    <select id="getById" resultType="com.zhoujixing.entity.CommentModel">
+		SELECT * FROM shop_comment WHERE shop_comment_id = #{0}
+	</select>
+    <!--查询所有信息-->
+    <select id="selA" parameterType="map" resultType="com.zhoujixing.entity.CommentModel">
+        SELECT * FROM shop_comment
+        <where>
+            <if test="user_id != null">
+                AND user_id=#{user_id}
+            </if>
+            <if test="shop_goods_id != null">
+                AND shop_goods_id=#{shop_goods_id}
+            </if>
+            <if test="shop_comment_content != null and shop_comment_content != ''">
+                AND shop_comment_content like CONCAT('%', #{shop_comment_content} ,'%')
+            </if>
+            <if test="shop_comment_create_time != null and shop_comment_create_time != ''">
+                AND Date(shop_comment_create_time) =  Date(#{shop_comment_create_time})
+            </if>
+        </where>
+    </select>
+    <!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE shop_comment
+        <set>
+            <if test="user_id != null">
+                user_id = #{user_id},
+            </if>
+            <if test="shop_goods_id != null">
+                shop_goods_id = #{shop_goods_id},
+            </if>
+            <if test="shop_comment_content != null">
+                shop_comment_content = #{shop_comment_content},
+            </if>
+            <if test="shop_comment_create_time != null">
+                shop_comment_create_time = #{shop_comment_create_time}
+            </if>
+        </set>
+        WHERE shop_comment_id = #{shop_comment_id}
+    </update>
+    <!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">DELETE FROM shop_comment WHERE shop_comment_id = #{0}</delete>
+
+</mapper>
+

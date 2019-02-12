@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.dao.GoodDetailsMapper">
+    <!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        shop_good_details(shop_goods_id,shop_good_details_detail,shop_good_details_create_time)
+        VALUES
+        (#{shop_goods_id},#{shop_good_details_detail},#{shop_good_details_create_time})
+    </insert>
+    <!--根据id查询一条信息-->
+    <select id="getById" resultType="com.zhoujixing.entity.GoodDetailsModel">
+		SELECT * FROM shop_good_details WHERE shop_good_details_id = #{0}
+	</select>
+    <!--查询所有信息-->
+    <select id="selA" parameterType="map" resultType="com.zhoujixing.entity.GoodDetailsModel">
+        SELECT * FROM shop_good_details
+        <where>
+            <if test="shop_goods_id != null">
+                AND shop_goods_id=#{shop_goods_id}
+            </if>
+            <if test="shop_good_details_detail != null and shop_good_details_detail != ''">
+                AND shop_good_details_detail like CONCAT('%', #{shop_good_details_detail} ,'%')
+            </if>
+            <if test="shop_good_details_create_time != null and shop_good_details_create_time != ''">
+                AND Date(shop_good_details_create_time) =  Date(#{shop_good_details_create_time})
+            </if>
+        </where>
+    </select>
+    <!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE shop_good_details
+        <set>
+            <if test="shop_goods_id != null">
+                shop_goods_id = #{shop_goods_id},
+            </if>
+            <if test="shop_good_details_detail != null">
+                shop_good_details_detail = #{shop_good_details_detail},
+            </if>
+            <if test="shop_good_details_create_time != null">
+                shop_good_details_create_time = #{shop_good_details_create_time}
+            </if>
+        </set>
+        WHERE shop_good_details_id = #{shop_good_details_id}
+    </update>
+    <!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">DELETE FROM shop_good_details WHERE shop_good_details_id = #{0}</delete>
+
+</mapper>
+

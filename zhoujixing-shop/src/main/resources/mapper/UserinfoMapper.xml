@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.dao.UserinfoMapper">
+    <!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        shop_userinfo(user_id,shop_userinfo_associator,shop_userinfo_balance,shop_userinfo_integral,shop_userinfo_create_time)
+        VALUES
+        (#{user_id},#{shop_userinfo_associator},#{shop_userinfo_balance},#{shop_userinfo_integral},#{shop_userinfo_create_time})
+    </insert>
+    <!--根据id查询一条信息-->
+    <select id="getById" resultType="com.zhoujixing.entity.UserinfoModel">
+		SELECT * FROM shop_userinfo WHERE shop_userinfo_id = #{0}
+	</select>
+    <!--查询所有信息-->
+    <select id="selA" parameterType="map" resultType="com.zhoujixing.entity.UserinfoModel">
+        SELECT * FROM shop_userinfo
+        <where>
+            <if test="user_id != null">
+                AND user_id=#{user_id}
+            </if>
+            <if test="shop_userinfo_associator != null and shop_userinfo_associator != ''">
+                AND shop_userinfo_associator like CONCAT('%', #{shop_userinfo_associator} ,'%')
+            </if>
+            <if test="shop_userinfo_balance != null">
+                AND shop_userinfo_balance=#{shop_userinfo_balance}
+            </if>
+            <if test="shop_userinfo_integral != null">
+                AND shop_userinfo_integral=#{shop_userinfo_integral}
+            </if>
+            <if test="shop_userinfo_create_time != null and shop_userinfo_create_time != ''">
+                AND Date(shop_userinfo_create_time) =  Date(#{shop_userinfo_create_time})
+            </if>
+        </where>
+    </select>
+    <!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE shop_userinfo
+        <set>
+            <if test="user_id != null">
+                user_id = #{user_id},
+            </if>
+            <if test="shop_userinfo_associator != null">
+                shop_userinfo_associator = #{shop_userinfo_associator},
+            </if>
+            <if test="shop_userinfo_balance != null">
+                shop_userinfo_balance = #{shop_userinfo_balance},
+            </if>
+            <if test="shop_userinfo_integral != null">
+                shop_userinfo_integral = #{shop_userinfo_integral},
+            </if>
+            <if test="shop_userinfo_create_time != null">
+                shop_userinfo_create_time = #{shop_userinfo_create_time}
+            </if>
+        </set>
+        WHERE shop_userinfo_id = #{shop_userinfo_id}
+    </update>
+    <!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">DELETE FROM shop_userinfo WHERE shop_userinfo_id = #{0}</delete>
+
+</mapper>
+

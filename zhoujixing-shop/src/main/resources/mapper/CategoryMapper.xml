@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhoujixing.dao.CategoryMapper">
+    <!--添加方法-->
+    <insert id="add">
+        INSERT INTO
+        shop_category(shop_category_pid,shop_category_sort,shop_category_cname,shop_category_keywords,shop_category_title,shop_category_description,shop_category_display,shop_category_create_time)
+        VALUES
+        (#{shop_category_pid},#{shop_category_sort},#{shop_category_cname},#{shop_category_keywords},#{shop_category_title},#{shop_category_description},#{shop_category_display},#{shop_category_create_time})
+    </insert>
+    <!--根据id查询一条信息-->
+    <select id="getById" resultType="com.zhoujixing.entity.CategoryModel">
+		SELECT * FROM shop_category WHERE shop_category_id = #{0}
+	</select>
+    <!--查询所有信息-->
+    <select id="selA" parameterType="map" resultType="com.zhoujixing.entity.CategoryModel">
+        SELECT * FROM shop_category
+        <where>
+            <if test="shop_category_pid != null">
+                AND shop_category_pid=#{shop_category_pid}
+            </if>
+            <if test="shop_category_sort != null">
+                AND shop_category_sort=#{shop_category_sort}
+            </if>
+            <if test="shop_category_cname != null and shop_category_cname != ''">
+                AND shop_category_cname like CONCAT('%', #{shop_category_cname} ,'%')
+            </if>
+            <if test="shop_category_keywords != null and shop_category_keywords != ''">
+                AND shop_category_keywords like CONCAT('%', #{shop_category_keywords} ,'%')
+            </if>
+            <if test="shop_category_title != null and shop_category_title != ''">
+                AND shop_category_title like CONCAT('%', #{shop_category_title} ,'%')
+            </if>
+            <if test="shop_category_description != null and shop_category_description != ''">
+                AND shop_category_description like CONCAT('%', #{shop_category_description} ,'%')
+            </if>
+            <if test="shop_category_display != null and shop_category_display != ''">
+                AND shop_category_display like CONCAT('%', #{shop_category_display} ,'%')
+            </if>
+            <if test="shop_category_create_time != null and shop_category_create_time != ''">
+                AND Date(shop_category_create_time) =  Date(#{shop_category_create_time})
+            </if>
+        </where>
+    </select>
+    <!--根据id修改某条信息-->
+    <update id="update">
+        UPDATE shop_category
+        <set>
+            <if test="shop_category_pid != null">
+                shop_category_pid = #{shop_category_pid},
+            </if>
+            <if test="shop_category_sort != null">
+                shop_category_sort = #{shop_category_sort},
+            </if>
+            <if test="shop_category_cname != null">
+                shop_category_cname = #{shop_category_cname},
+            </if>
+            <if test="shop_category_keywords != null">
+                shop_category_keywords = #{shop_category_keywords},
+            </if>
+            <if test="shop_category_title != null">
+                shop_category_title = #{shop_category_title},
+            </if>
+            <if test="shop_category_description != null">
+                shop_category_description = #{shop_category_description},
+            </if>
+            <if test="shop_category_display != null">
+                shop_category_display = #{shop_category_display},
+            </if>
+            <if test="shop_category_create_time != null">
+                shop_category_create_time = #{shop_category_create_time}
+            </if>
+        </set>
+        WHERE shop_category_id = #{shop_category_id}
+    </update>
+    <!--根据id删除客户信息（物理删除）-->
+    <delete id="delById" parameterType="java.lang.Integer">DELETE FROM shop_category WHERE shop_category_id = #{0}</delete>
+
+</mapper>
+
