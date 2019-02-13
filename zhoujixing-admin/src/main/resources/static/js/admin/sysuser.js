@@ -40,7 +40,7 @@ $(function () {
 			{ label: '最后登录时间', name: 'lastlogintime', index: 'lastlogintime', width: 80  ,formatter:"date"},
 			{ label: '最后登录地址', name: 'lastloginaddr', index: 'lastLoginAddr', width: 80 },
 			{ label: '备注', name: 'remark', index: 'remark', width: 80 },
-			{ label: '用户状态（0：不可用；1：可用；2：已禁用；-1：已删除）', name: 'state', index: 'state', width: 80,formatter: function (cellvalue, options, rowObject) {
+			{ label: '用户状态', name: 'state', index: 'state', width: 80,formatter: function (cellvalue, options, rowObject) {
 					if (cellvalue ==0){
 						return"不可用";
 					}

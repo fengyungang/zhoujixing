@@ -14,6 +14,9 @@ import java.util.Map;
 @Service
 public class SysMeunServiceImpl implements SysMeunService {
 
+    /**
+     *
+     */
     @Autowired
     private MenuMapper sysMenuMapper;
 
